@@ -12,7 +12,7 @@ export function MobileBlack(props) {
   const groupRef = useRef();
   //to rotate the model
    useFrame(() => {
-     groupRef.current.rotation.y += 0.01; 
+     groupRef.current.rotation.y += 0.005; 
    })
 
   return (
