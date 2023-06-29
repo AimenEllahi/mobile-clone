@@ -20,7 +20,7 @@ function BackgroundBox() {
     <mesh ref={meshRef}>
       <boxBufferGeometry args={[1000, 1000, 1000]} />
       <meshBasicMaterial side={2}>
-        <primitive attach="map" object={new TextureLoader().load('/assets/color.jpg')} />
+        <primitive attach="map" object={new TextureLoader().load('/assets/back.jpg')} />
       </meshBasicMaterial>
     </mesh>
   );
@@ -33,12 +33,12 @@ function App() {
       width: '440px',
       height: '790px', margin: '0', padding: '0' }}>
       <Canvas style={{ width: '440px', height: '790px' }}>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} />
         <BackgroundBox />
         <Environment preset='sunset' />
-        <PresentationControls>
-          <MobileBlack />
-        </PresentationControls>
-      
+        <MobileBlack />
+        <OrbitControls />    
       </Canvas>
 
       <div
