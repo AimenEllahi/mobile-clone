@@ -1,11 +1,36 @@
-import React, { useRef, Suspense } from 'react';
-import './App.css';
-import LoaderComponent from './Components/LoaderComponent';
-import { Canvas, useFrame, useThree} from '@react-three/fiber';
-import { Environment, OrbitControls, PresentationControls} from '@react-three/drei';
-import { MobileBlack } from './Components/MobileBlack';
-import { TextureLoader } from 'three';
+import React, { useRef, Suspense, useState } from "react";
+import "./App.css";
+import LoaderComponent from "./Components/LoaderComponent";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import {
+  Environment,
+  OrbitControls,
+  PresentationControls,
+} from "@react-three/drei";
+import { MobileBlack } from "./Components/MobileBlack";
+import { TextureLoader } from "three";
+import useAnimationStore from "./Store/AnimationState";
+import Animation from "./Components/Animations";
+import { MdCancel } from "react-icons/md";
+import useColorStore from "./Store/ColorStore";
 
+const colorArray = [
+  {
+    name: "Blue",
+    hex: "#2596be",
+    imageUrl: "/assets/color_1.png",
+  },
+  {
+    name: "Black",
+    hex: "#191a1c",
+    imageUrl: "/assets/color_2.png",
+  },
+  {
+    name: "Gray",
+    hex: "#848589",
+    imageUrl: "/assets/color_3.png",
+  },
+];
 
 function BackgroundBox() {
   const meshRef = useRef();
@@ -20,63 +45,115 @@ function BackgroundBox() {
     <mesh ref={meshRef}>
       <boxBufferGeometry args={[1000, 1000, 1000]} />
       <meshBasicMaterial side={2}>
-        <primitive attach="map" object={new TextureLoader().load('/assets/back.jpg')} />
+        <primitive
+          attach='map'
+          object={new TextureLoader().load("/assets/back.jpg")}
+        />
       </meshBasicMaterial>
     </mesh>
   );
 }
 
-function App() {
+function CancelButton() {
+  const setActiveState = useAnimationStore((state) => state.setActiveState);
   return (
-       <div style={{ 
-      // border: '1px solid black',
-      width: '440px',
-      height: '790px', margin: '0', padding: '0' }}>
-      <Canvas style={{ width: '440px', height: '790px' }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        <BackgroundBox />
-        <Environment preset='sunset' />
-        <MobileBlack />
-        <OrbitControls />    
-      </Canvas>
+    <MdCancel
+      size={25}
+      color='#fff'
+      className='cancel-button'
+      onClick={() => setActiveState(0)}
+    />
+  );
+}
 
-      <div
-        style={{
-          border: '1px solid black',
-          width: '440px',
-          height: '80px',
-          position: 'fixed',
-          bottom: '0',
-          borderTopLeftRadius: '30px',
-          borderTopRightRadius: '30px',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          backgroundColor: 'black',
-        }}
-      >
-        <div className='icon-container'>
-          <img src="/assets/color.jpg" alt="color" className='color-img-icon'/>
+function App() {
+  const setActiveState = useAnimationStore((state) => state.setActiveState);
+  const { setColor, color } = useColorStore();
+  const perfContRef = useRef();
+  const menuRef = useRef();
+  const colorContRef = useRef();
+
+  return (
+    <div
+      style={{
+        width: "440px",
+        height: "100vh",
+        margin: "0",
+        padding: "0",
+        position: "relative",
+      }}
+    >
+      <Canvas style={{ width: "440px", height: "100vh", zIndex: 0 }}>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[0, 10, 10]} />
+        <directionalLight intensity={1} />
+        <BackgroundBox />
+
+        <Environment background={false} preset='apartment' />
+        <MobileBlack />
+        <OrbitControls />
+        <Animation
+          perfContRef={perfContRef}
+          menuRef={menuRef}
+          colorContRef={colorContRef}
+        />
+      </Canvas>
+      <div ref={perfContRef} className='performance-container'>
+        <CancelButton />
+        <span className='performance-header'>Snapdragon® 8+ Gen 1</span>
+        <span className='performance-text'>120W HyperCharge</span>
+        <span className='performance-text'>Single-cell 5000mAh battery</span>
+      </div>
+
+      <div ref={colorContRef} className='color-container'>
+        <CancelButton />
+        <span className='color-header'>
+          {colorArray.filter((item) => item.hex === color)[0].name}
+        </span>
+
+        <img
+          src='/assets/color_1.png'
+          onClick={() => setColor("#2596be")}
+          className={`color-div ${
+            color === "#2596be" && "color-div-selected"
+          } `}
+        />
+        <img
+          src='/assets/color_2.png'
+          onClick={() => setColor("#191a1c")}
+          className={`color-div ${
+            color === "#191a1c" && "color-div-selected"
+          } `}
+        />
+        <img
+          src='/assets/color_3.png'
+          onClick={() => setColor("#848589")}
+          className={`color-div ${
+            color === "#848589" && "color-div-selected"
+          } `}
+        />
+      </div>
+
+      <div ref={menuRef} className='menu-container'>
+        <div className='icon-container' onClick={() => setActiveState(1)}>
+          <img src='/assets/color.jpg' alt='color' className='color-img-icon' />
           <div className='color-white-bg'></div>
           <div className='color-icon-text'>Coloris</div>
         </div>
-        <div className='icon-container'>
-          <img src='/assets/home_3.png' className='camera-img-icon'/>
+        <div className='icon-container' onClick={() => setActiveState(2)}>
+          <img src='/assets/home_3.png' className='camera-img-icon' />
           <div className='camera-icon-text'>Camera</div>
         </div>
-        <div className='icon-container'>
-          <img src='/assets/home_2.png' className='ecran-img-icon'/>
+        <div className='icon-container' onClick={() => setActiveState(3)}>
+          <img src='/assets/home_2.png' className='ecran-img-icon' />
           <div className='ecran-icon-text'>Ecran</div>
         </div>
-        <div className='icon-container'>
-          <img src='/assets/home_4.png' className='performance-img-icon'/>
+        <div className='icon-container' onClick={() => setActiveState(4)}>
+          <img src='/assets/home_4.png' className='performance-img-icon' />
           <div className='performance-icon-text'>Performance</div>
         </div>
       </div>
     </div>
-
-   
   );
 }
 
