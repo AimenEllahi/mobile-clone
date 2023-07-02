@@ -14,23 +14,7 @@ import Animation from "./Components/Animations";
 import { MdCancel } from "react-icons/md";
 import useColorStore from "./Store/ColorStore";
 
-const colorArray = [
-  {
-    name: "Blue",
-    hex: "#2596be",
-    imageUrl: "/assets/color_1.png",
-  },
-  {
-    name: "Black",
-    hex: "#191a1c",
-    imageUrl: "/assets/color_2.png",
-  },
-  {
-    name: "Gray",
-    hex: "#848589",
-    imageUrl: "/assets/color_3.png",
-  },
-];
+
 
 function BackgroundBox() {
   const meshRef = useRef();
@@ -56,22 +40,29 @@ function BackgroundBox() {
 
 function CancelButton() {
   const setActiveState = useAnimationStore((state) => state.setActiveState);
+  const activeState = useAnimationStore((state) => state.activeState);
   return (
     <MdCancel
       size={25}
       color='#fff'
       className='cancel-button'
       onClick={() => setActiveState(0)}
+      style={{
+        zIndex: activeState === 0 ? -1 : 6,
+      }}
     />
   );
 }
 
 function App() {
   const setActiveState = useAnimationStore((state) => state.setActiveState);
-  const { setColor, color } = useColorStore();
+  const activeState = useAnimationStore((state) => state.activeState);
+  const color = useColorStore((state) => state.color);
+  const setColor = useColorStore((state) => state.setColor);
   const perfContRef = useRef();
   const menuRef = useRef();
   const colorContRef = useRef();
+  const displayRef = useRef();
 
   return (
     <div
@@ -83,30 +74,37 @@ function App() {
         position: "relative",
       }}
     >
-      <Canvas style={{ width: "440px", height: "100vh", zIndex: 0 }}>
+      <Canvas
+        style={{
+          width: "440px",
+          height: "100vh",
+          zIndex: 0,
+          backgroundColor: "#000",
+        }}
+      >
         <ambientLight intensity={0.5} />
-        <pointLight position={[0, 10, 10]} />
-        <directionalLight intensity={1} />
-        <BackgroundBox />
+        {/* <pointLight position={[0, 10, 10]} />
+        <directionalLight intensity={1} /> */}
+        {activeState !== 3 && <BackgroundBox />}
 
         <Environment background={false} preset='apartment' />
         <MobileBlack />
-        <OrbitControls />
+        <OrbitControls enabled={activeState !== 3} />
         <Animation
           perfContRef={perfContRef}
           menuRef={menuRef}
           colorContRef={colorContRef}
+          displayRef={displayRef}
         />
       </Canvas>
+      <CancelButton />
       <div ref={perfContRef} className='performance-container'>
-        <CancelButton />
         <span className='performance-header'>Snapdragon® 8+ Gen 1</span>
         <span className='performance-text'>120W HyperCharge</span>
         <span className='performance-text'>Single-cell 5000mAh battery</span>
       </div>
 
-      <div ref={colorContRef} className='color-container'>
-        <CancelButton />
+      {/* <div ref={colorContRef} className='color-container'>
         <span className='color-header'>
           {colorArray.filter((item) => item.hex === color)[0].name}
         </span>
@@ -132,8 +130,11 @@ function App() {
             color === "#848589" && "color-div-selected"
           } `}
         />
+      </div> */}
+      <div ref={displayRef} className='display-container'>
+        <div className='display-header'>120Hz CrystalRes AMOLED display</div>
+        <img src='/assets/PM_1.png' className='display-img' />
       </div>
-
       <div ref={menuRef} className='menu-container'>
         <div className='icon-container' onClick={() => setActiveState(1)}>
           <img src='/assets/color.jpg' alt='color' className='color-img-icon' />

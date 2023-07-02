@@ -3,7 +3,12 @@ import { gsap } from "gsap";
 import { useThree } from "@react-three/fiber";
 import useAnimationStore from "../Store/AnimationState";
 
-export default function Animations({ perfContRef, menuRef, colorContRef }) {
+export default function Animations({
+  perfContRef,
+  menuRef,
+  colorContRef,
+  displayRef,
+}) {
   const activeState = useAnimationStore((state) => state.activeState);
   const { camera } = useThree();
   useEffect(() => {
@@ -17,8 +22,8 @@ export default function Animations({ perfContRef, menuRef, colorContRef }) {
           z: -5,
           onStart: () => {
             perfContRef.current.style.zIndex = -1;
-            colorContRef.current.style.zIndex = -1;
 
+            displayRef.current.style.zIndex = -1;
             gsap.to(menuRef.current, {
               duration: 1,
               y: 0,
@@ -27,7 +32,6 @@ export default function Animations({ perfContRef, menuRef, colorContRef }) {
         });
         break;
       case 1:
-        colorContRef.current.style.zIndex = 5;
         gsap.to(menuRef.current, {
           duration: 1,
           y: 200,
@@ -36,6 +40,14 @@ export default function Animations({ perfContRef, menuRef, colorContRef }) {
       case 2:
         break;
       case 3:
+        setTimeout(() => {
+          displayRef.current.style.zIndex = 5;
+        }, 800);
+
+        gsap.to(menuRef.current, {
+          duration: 1,
+          y: 200,
+        });
         break;
       case 4:
         gsap.to(camera.position, {
