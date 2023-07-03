@@ -130,7 +130,6 @@
 .display-container {
   display: flex;
   flex-direction: column;
-
   align-items: center;
   position: absolute;
   top: 0;
@@ -138,6 +137,45 @@
   height: 100%;
   width: 100%;
   z-index: -1;
+}
+
+.cam-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  /* border: 1px solid black; */
+  background-color: #fff;
+}
+
+.camera-header{
+  /* border: 1px solid black; */
+  height: 40%;
+  transform: translate(-80%, 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.icon-cam{
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-cam-img{
+  width: 50%;
+  height: 50%;
+  /* border: 1px solid blue; */
 }
 
 .display-header {

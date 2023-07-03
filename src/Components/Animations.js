@@ -8,6 +8,7 @@ export default function Animations({
   menuRef,
   colorContRef,
   displayRef,
+  cameraRef
 }) {
   const activeState = useAnimationStore((state) => state.activeState);
   const { camera } = useThree();
@@ -38,6 +39,14 @@ export default function Animations({
         });
         break;
       case 2:
+        setTimeout(() => {
+          cameraRef.current.style.zIndex = 5;
+        }, 800);
+
+        gsap.to(menuRef.current, {
+          duration: 1,
+          y: 200,
+        });
         break;
       case 3:
         setTimeout(() => {

@@ -1,37 +1,40 @@
-import React from "react";
-
 import { useProgress, Html } from "@react-three/drei";
+import { useControls } from "leva";
 
 const LoaderComponent = () => {
   const { progress } = useProgress();
+  
+
   return (
     <Html>
-      <div style={{
-        position: "absolute",
-        width: "100vw",
-        height: "100vh",
-        border: "1px solid black",
-        margin: "0",
-        padding: "0",
-        transform: "translate(-80%, -50%)",
-      }}
+      <div
+        style={{
+          minWidth: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          border: "2px solid red",
+          backgroundColor: "white", // Optional: Add a semi-transparent background color
+        }}
       >
+        {/* Loader content */}
         <img
-            src="/assets/load.png"
-            alt="logo"
-            style={{ position: "absolute", width: "100%", height: "100%"}}
-            />
+          src="/assets/load.png"
+          alt="logo"
+          style={{ width: "100%", height: "auto" }} // Adjust the width and height as needed
+        />
         <span
           style={{
-            position: "relative",
+            position: "absolute",
             color: "#000",
             fontSize: "4rem",
             textAlign: "center",
-            height: "10%",
+            bottom: "10px",
+            width: "100%",
           }}
         >
-          {" "}
-          {progress.toFixed(0)} %
+          {progress.toFixed(0)}%
         </span>
       </div>
     </Html>

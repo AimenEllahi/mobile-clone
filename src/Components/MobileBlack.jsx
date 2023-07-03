@@ -37,11 +37,11 @@ export function MobileBlack(props) {
 
   const { rotation, position } = useControls({
     rotation: {
-      value: [-2.03, -0.61, 3.88],
+      value: [0,0,0],
       step: 0.01,
     },
     position: {
-      value: [-0.31, -0.64, -3.25],
+      value: [0, -1.5, -0],
       step: 0.01,
     },
   });
@@ -66,6 +66,34 @@ export function MobileBlack(props) {
     timeline.to({}, { duration: 1 });
   }, []);
 
+  //on activeState 2
+  useEffect(() => {
+    if (activeState === 2) {
+      gsap.to(groupRef.current.position, {
+        x: -0.659,
+        y: -3,
+        z: -3.22,
+        duration: 1,
+        onStart: () => {
+          gsap.to(groupRef.current.rotation, {
+            x: 0,
+            y: -0.64,
+            z: 0,
+            duration: 1,
+          });
+        },
+      });
+    } else if (activeState === 0) {
+      gsap.to(groupRef.current.position, {
+        x: 0,
+        y: -1.5,
+        z: 0,
+        duration: 1,
+      });
+    }
+  }, [activeState]);
+
+
   useEffect(() => {
     if (activeState === 3) {
       gsap.to(groupRef.current.position, {
@@ -82,7 +110,7 @@ export function MobileBlack(props) {
           });
         },
       });
-    } else if (activeState === 0 && !firstRender) {
+    } else if (activeState === 0) {
       gsap.to(groupRef.current.position, {
         x: 0,
         y: -1.5,
@@ -141,7 +169,8 @@ export function MobileBlack(props) {
       <group
         ref={groupRef}
         scale={24}
-        position={[0, -1.5, 0]}
+        position={position}
+        rotation={rotation}
         {...props}
         dispose={null}
       >

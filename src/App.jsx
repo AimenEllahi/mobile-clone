@@ -63,9 +63,10 @@ function App() {
   const menuRef = useRef();
   const colorContRef = useRef();
   const displayRef = useRef();
+  const cameraRef = useRef();
 
   return (
-    <div
+      <div
       style={{
         width: "440px",
         height: "100vh",
@@ -74,6 +75,7 @@ function App() {
         position: "relative",
       }}
     >
+
       <Canvas
         style={{
           width: "440px",
@@ -82,6 +84,7 @@ function App() {
           backgroundColor: "#000",
         }}
       >
+        
         <ambientLight intensity={0.5} />
         {/* <pointLight position={[0, 10, 10]} />
         <directionalLight intensity={1} /> */}
@@ -96,6 +99,7 @@ function App() {
           colorContRef={colorContRef}
           displayRef={displayRef}
         />
+    
       </Canvas>
       <CancelButton />
       <div ref={perfContRef} className='performance-container'>
@@ -131,6 +135,23 @@ function App() {
           } `}
         />
       </div> */}
+      {/*For camera container */}
+      <div ref={cameraRef} className="cam-container">
+        <div className="camera-header">
+          <div className="icon-cam">
+            <img src="/assets/icon_1.png" className="icon-cam-img" />
+            <span>some info</span>
+          </div>
+          <div className="icon-cam">
+            <img src="/assets/icon_2.png" className="icon-cam-img" />
+            <span>some info</span>
+          </div>
+          <div className="icon-cam">
+            <img src="/assets/icon_3.png" className="icon-cam-img" />
+            <span>some info</span>
+          </div>
+        </div>
+      </div>
       <div ref={displayRef} className='display-container'>
         <div className='display-header'>120Hz CrystalRes AMOLED display</div>
         <img src='/assets/PM_1.png' className='display-img' />
@@ -154,7 +175,9 @@ function App() {
           <div className='performance-icon-text'>Performance</div>
         </div>
       </div>
-    </div>
+      
+        </div>
+  
   );
 }
 
