@@ -43,10 +43,7 @@ export default function Animations({
           cameraRef.current.style.zIndex = 5;
         }, 800);
 
-        gsap.to(menuRef.current, {
-          duration: 1,
-          y: 200,
-        });
+    
         break;
       case 3:
         setTimeout(() => {

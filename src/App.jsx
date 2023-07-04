@@ -15,7 +15,6 @@ import { MdCancel } from "react-icons/md";
 import useColorStore from "./Store/ColorStore";
 
 
-
 function BackgroundBox() {
   const meshRef = useRef();
 
@@ -64,18 +63,10 @@ function App() {
   const colorContRef = useRef();
   const displayRef = useRef();
   const cameraRef = useRef();
+  const galleryRef = useRef();
 
   return (
-      <div
-      style={{
-        width: "440px",
-        height: "100vh",
-        margin: "0",
-        padding: "0",
-        position: "relative",
-      }}
-    >
-
+      <div className="main-canvas-container">
       <Canvas
         style={{
           width: "440px",
@@ -108,56 +99,45 @@ function App() {
         <span className='performance-text'>Single-cell 5000mAh battery</span>
       </div>
 
-      {/* <div ref={colorContRef} className='color-container'>
-        <span className='color-header'>
-          {colorArray.filter((item) => item.hex === color)[0].name}
-        </span>
-
-        <img
-          src='/assets/color_1.png'
-          onClick={() => setColor("#2596be")}
-          className={`color-div ${
-            color === "#2596be" && "color-div-selected"
-          } `}
-        />
-        <img
-          src='/assets/color_2.png'
-          onClick={() => setColor("#191a1c")}
-          className={`color-div ${
-            color === "#191a1c" && "color-div-selected"
-          } `}
-        />
-        <img
-          src='/assets/color_3.png'
-          onClick={() => setColor("#848589")}
-          className={`color-div ${
-            color === "#848589" && "color-div-selected"
-          } `}
-        />
-      </div> */}
       {/*For camera container */}
       <div ref={cameraRef} className="cam-container">
+        <CancelButton />
         <div className="camera-header">
           <div className="icon-cam">
-            <img src="/assets/icon_1.png" className="icon-cam-img" />
-            <span>some info</span>
+            <img src="/assets/icon_2.png" className="icon-cam-img" />
+            <span className="icon-cam-heading" >200MP</span>
+            <span className="icon-cam-text">
+              1/1.37” sensor size, 1.2μm pixel size, 16-in-1
+            </span>
           </div>
           <div className="icon-cam">
-            <img src="/assets/icon_2.png" className="icon-cam-img" />
-            <span>some info</span>
+            <img src="/assets/icon_1.png" className="icon-cam-img" />
+            <span className="icon-cam-heading">Ultra grand-angle</span>
+            <span className="icon-cam-text">F2.2 / POV 120</span>
           </div>
           <div className="icon-cam">
             <img src="/assets/icon_3.png" className="icon-cam-img" />
-            <span>some info</span>
+            <span className="icon-cam-heading">Macro</span>
+            <span className="icon-cam-text">F2.4</span>
           </div>
         </div>
       </div>
+
+      {/*For display container */}
       <div ref={displayRef} className='display-container'>
         <div className='display-header'>120Hz CrystalRes AMOLED display</div>
         <img src='/assets/PM_1.png' className='display-img' />
       </div>
+
+      {/*For menu container */}
       <div ref={menuRef} className='menu-container'>
-        <div className='icon-container' onClick={() => setActiveState(1)}>
+        { activeState === 2 ? (
+          <div className='menu-arrow-img'>
+            <img className="arrow-up-img" src='/assets/up.png' />
+          </div>
+        ) : (
+          <>
+          <div className='icon-container' onClick={() => setActiveState(1)}>
           <img src='/assets/color.jpg' alt='color' className='color-img-icon' />
           <div className='color-white-bg'></div>
           <div className='color-icon-text'>Coloris</div>
@@ -173,6 +153,49 @@ function App() {
         <div className='icon-container' onClick={() => setActiveState(4)}>
           <img src='/assets/home_4.png' className='performance-img-icon' />
           <div className='performance-icon-text'>Performance</div>
+        </div>
+        </>
+        )
+        }
+      </div>
+
+      {/*For gallery container */}
+      <div ref={galleryRef} className='gallery-container'>
+        <div className="gallery-content-container">
+          <CancelButton />
+          <div className="gallery-text-container">
+            <span className="gallery-text">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+               Repellat repellendus error cum expedita 
+              distinctio recusandae quo aspernatur modi! Ab libero aspernatur
+               impedit aliquid quod reiciendis a. Vel aut doloremque aperiam.
+            </span>
+          </div>
+          <div className="gallery-img-conatiner">
+            <div className="left-gallery">
+            <div className="gallery-img gallery-img1">
+              <img src="/assets/P3_1.jpg" alt="Image 1" className="gallery-image"/>
+            </div>
+            <div className="gallery-img gallery-img2">
+              <img src="/assets/P3_2.jpg" alt="Image 2" className="gallery-image"/>
+            </div>
+            <div className="gallery-img gallery-img3">
+              <img src="/assets/P3_3.jpg" alt="Image 3" className="gallery-image" />
+            </div>
+            </div>
+           
+            <div className="right-gallery">
+            <div className="gallery-img gallery-img4">
+              <img src="/assets/P3_4.jpg" alt="Image 4" className="gallery-image"/>
+            </div>
+            <div className="gallery-img gallery-img5">
+              <img src="/assets/P3_5.jpg" alt="Image 5" className="gallery-image"/>
+            </div>
+            <div className="gallery-img gallery-img6">
+              <img src="/assets/P3_6.jpg" alt="Image 6" className="gallery-image"/>
+            </div>
+            </div>
+          </div>
         </div>
       </div>
       
