@@ -8,7 +8,7 @@ import { Html, useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 import { gsap } from "gsap";
-import useColorStore from "../Store/ColorStore";
+
 import useAnimationStore from "../Store/AnimationState";
 const colorArray = [
   {
@@ -31,13 +31,13 @@ const colorArray = [
 export function MobileBlack(props) {
   const { nodes, materials } = useGLTF("/BLACK-transformed.glb");
   const activeState = useAnimationStore((state) => state.activeState);
-  const [firstRender, setFirstRender] = useState(true);
+
   const [color, setColor] = useState("#2596be");
   const groupRef = useRef();
 
   const { rotation, position } = useControls({
     rotation: {
-      value: [0,0,0],
+      value: [0, 0, 0],
       step: 0.01,
     },
     position: {
@@ -51,7 +51,7 @@ export function MobileBlack(props) {
     const timeline = gsap.timeline();
 
     // Set initial position
-    groupRef.current.position.set(0, -1.5, -5);
+    groupRef.current.position.set(0, -1.5, 5);
 
     // Initial spinning animation with movement
     timeline.to(groupRef.current.position, {
@@ -66,9 +66,23 @@ export function MobileBlack(props) {
     timeline.to({}, { duration: 1 });
   }, []);
 
-  //on activeState 2
   useEffect(() => {
-    if (activeState === 2) {
+    if (activeState === 3) {
+      gsap.to(groupRef.current.position, {
+        x: -0.35,
+        y: -0.69,
+        z: -3.41,
+        duration: 1,
+        onStart: () => {
+          gsap.to(groupRef.current.rotation, {
+            x: -1.91,
+            y: -0.52,
+            z: 3.94,
+            duration: 1,
+          });
+        },
+      });
+    } else if (activeState === 2) {
       gsap.to(groupRef.current.position, {
         x: -0.659,
         y: -3,
@@ -89,40 +103,12 @@ export function MobileBlack(props) {
         y: -1.5,
         z: 0,
         duration: 1,
-      });
-    }
-  }, [activeState]);
-
-
-  useEffect(() => {
-    if (activeState === 3) {
-      gsap.to(groupRef.current.position, {
-        x: -0.35,
-        y: -0.69,
-        z: -3.41,
-        duration: 1,
-        onStart: () => {
-          gsap.to(groupRef.current.rotation, {
-            x: -1.91,
-            y: -0.52,
-            z: 3.94,
-            duration: 1,
-          });
-        },
-      });
-    } else if (activeState === 0) {
-      gsap.to(groupRef.current.position, {
-        x: 0,
-        y: -1.5,
-        z: 0,
-        duration: 1,
         onStart: () => {
           gsap.to(groupRef.current.rotation, {
             x: 0,
             y: 0,
             z: 0,
             duration: 1,
-            delay: 0.5,
           });
         },
       });
