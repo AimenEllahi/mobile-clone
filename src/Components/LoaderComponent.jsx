@@ -2,18 +2,21 @@ import { useProgress, Html } from "@react-three/drei";
 import { useControls } from "leva";
 import { useEffect } from "react";
 
-const LoaderComponent = ({ setProgress }) => {
-  const { progress } = useProgress();
-  console.log(progress);
-
-  useEffect(() => {
-    console.log(progress);
-    setProgress(progress);
-  }, [progress]);
+const LoaderComponent = () => {
 
   return (
     <Html>
-      <div></div>
+      <div style={{
+        position: "absolute",
+        height: "100vh",
+        width: "100vw",
+        border: "1px solid black",
+        top: 0,
+        left: 0,
+      }}>
+        <h1 style={{ color: "black" }}>Loading...</h1>
+        <img src="/assets/load.png" alt="" />
+      </div>
     </Html>
   );
 };

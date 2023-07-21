@@ -1,4 +1,4 @@
-import React, { useRef, Suspense, useState } from "react";
+import React, { useRef, Suspense, useState, useMemo } from "react";
 import "./App.css";
 import LoaderComponent from "./Components/LoaderComponent";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -9,8 +9,8 @@ import {
   useProgress,
   Html,
 } from "@react-three/drei";
-import { MobileBlack } from "./Components/MobileBlack";
-import { TextureLoader } from "three";
+import { ModelBlue } from "./Components/ModelBlue";
+import { TextureLoader, CubeTextureLoader } from "three";
 import useAnimationStore from "./Store/AnimationState";
 import Animation from "./Components/Animations";
 import { MdCancel } from "react-icons/md";
@@ -20,25 +20,29 @@ const Loader = () => {
   const { progress } = useProgress();
   console.log(progress);
   useEffect(() => {
-    console.log(progress);
+    console.log("this is progress: " + progress);
   }, [progress]);
 
   return (
     <Html center>
-      <div className='loading-container'>
-        <div className='loading-bar-container'>
-          <div
-            className='loading-bar'
-            style={{ width: `${progress * 100}%` }}
-          />
+      <div className='loading-container'  >
+        <div className='loading-bar-container' style={{
+          color: "black",
+          fontSize: "1.5rem",
+        }}>
+           {progress}%
         </div>
       </div>
     </Html>
   );
 };
 
+
+
 function BackgroundBox() {
   const meshRef = useRef();
+
+  const texture = useMemo(() => new TextureLoader().load('/assets/back.jpg'), []);
 
   useFrame(() => {
     if (meshRef.current) {
@@ -49,10 +53,7 @@ function BackgroundBox() {
   return (
     <mesh ref={meshRef}>
       <boxGeometry args={[1000, 1000, 1000]} />
-      <meshBasicMaterial
-        side={2}
-        map={new TextureLoader().load("/assets/back.jpg")}
-      />
+      <meshBasicMaterial side={2} map={texture} />
     </mesh>
   );
 }
@@ -106,9 +107,9 @@ function App() {
           <pointLight position={[0, 10, 10]} />
           <directionalLight intensity={1} />
           <Environment background={false} preset='apartment' />
-          {activeState !== 3 && activeState !== 2 && <BackgroundBox />}
-          <Suspense fallback={<Loader />}>
-            <MobileBlack />
+          {activeState !== 3 && activeState !== 2 && <BackgroundBox/>}
+          <Suspense fallback={<Loader/>}>
+            <ModelBlue />
             <OrbitControls enabled={activeState !== 3} />
             <Animation perfContRef={perfContRef} menuRef={menuRef} />
           </Suspense>
@@ -119,8 +120,8 @@ function App() {
       {activeState === 4 && (
         <div ref={perfContRef} className='performance-container'>
           <span className='performance-header'>Snapdragon® 8+ Gen 1</span>
-          <span className='performance-text'>120W HyperCharge</span>
-          <span className='performance-text'>Single-cell 5000mAh battery</span>
+          <span className='performance-text'>MediaTek Helio G88</span>
+          <span className='performance-text'>Large 5000mAh Battery</span>
         </div>
       )}
 
@@ -129,21 +130,24 @@ function App() {
         <div className='cam-container'>
           <div className='camera-header'>
             <div className='icon-cam'>
-              <img src='/assets/icon_2.png' className='icon-cam-img' />
+            <img src='/assets/Camera/01.svg' className='icon-cam-img' />
+              {/* <img src='/assets/icon_2.png' className='icon-cam-img' />
               <span className='icon-cam-heading'>200MP</span>
               <span className='icon-cam-text'>
                 1/1.37” sensor size, 1.2μm pixel size, 16-in-1
-              </span>
+              </span> */}
             </div>
             <div className='icon-cam'>
-              <img src='/assets/icon_1.png' className='icon-cam-img' />
+            <img src='/assets/Camera/02.svg' className='icon-cam-img' />
+              {/* <img src='/assets/icon_1.png' className='icon-cam-img' />
               <span className='icon-cam-heading'>Ultra grand-angle</span>
-              <span className='icon-cam-text'>F2.2 / POV 120</span>
+              <span className='icon-cam-text'>F2.2 / POV 120</span> */}
             </div>
             <div className='icon-cam'>
-              <img src='/assets/icon_3.png' className='icon-cam-img' />
+            <img src='/assets/Camera/03.svg' className='icon-cam-img' />
+              {/* <img src='/assets/icon_3.png' className='icon-cam-img' />
               <span className='icon-cam-heading'>Macro</span>
-              <span className='icon-cam-text'>F2.4</span>
+              <span className='icon-cam-text'>F2.4</span> */}
             </div>
           </div>
         </div>

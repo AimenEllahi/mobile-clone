@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 161.37 125.42">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: GothamBold, GothamBold;
+        font-size: 25px;
+      }
+
+      .cls-2 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-3 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-4 {
+        font-family: GothamBook, GothamBook;
+        font-size: 16px;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+
+      .cls-6 {
+        letter-spacing: -.1em;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+
+      .cls-8 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-9 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <text class="cls-1" transform="translate(0 93.6)"><tspan x="0" y="0">1</tspan><tspan class="cls-6" x="10.55" y="0">7</tspan><tspan class="cls-5" x="23.52" y="0">.2cm(6</tspan><tspan class="cls-2" x="111.95" y="0">.</tspan><tspan class="cls-8" x="118.6" y="0">7</tspan><tspan x="133.7" y="0">9)</tspan></text>
+      <text class="cls-4" transform="translate(26.62 122.78)"><tspan x="0" y="0">FHD+ Displ</tspan><tspan class="cls-3" x="89.73" y="0">a</tspan><tspan class="cls-7" x="98.67" y="0">y</tspan></text>
+      <g>
+        <path class="cls-9" d="m87.87,25.48c-.18-.38-.55-3.94-4.66-2.62"/>
+        <path class="cls-9" d="m87.54,7.75h-22.98"/>
+        <path class="cls-9" d="m92.58,27.17c-.19-.34-.88-3.2-3.84-2.05-.04.02-1.28.27-1.18,4,0,1.52,0,3.04,0,4.56,0,.48-.03.96-.05,1.43"/>
+        <path class="cls-9" d="m82.69,35.11c.08-1.14.05-2.29.05-3.43,0-1.79-.04-3.59-.05-5.38,0-.65.06-8.42.05-9.22-.02-1.71-1.18-2.69-2.51-2.67-1.18.02-2.31,1.01-2.31,2.31,0,1.45,0,2.9,0,4.36,0,5.04,0,10.08,0,15.12,0,.56-.13,1.07-.52,1.48"/>
+        <path class="cls-9" d="m92.33,34.55c-.08-1.91-.09-3.83,0-5.74,0-.17.26-2.32,2.51-2.32,1.23,0,2.25,1.03,2.25,2.27,0,6.34,0,12.67,0,19.01"/>
+        <path class="cls-9" d="m77.26,37.68c-.7-.27-1.02-.91-1.38-1.49-.8-1.33-1.75-2.53-3.04-3.42-.75-.52-1.62-.75-2.55-.57-.66.12-1.02.6-1.08,1.28-.09,1.05.4,1.94.73,2.87,1.24,3.46,2.53,6.9,3.77,10.36.23.63,2.52,3.02,3.04,2.92"/>
+        <path class="cls-9" d="m87.77,18.82c0-3.84-.14-13.3-.02-14.2.21-1.56-1.09-2.88-2.75-3.07-.37-.04-.75-.05-1.13-.05-5.33,0-10.66,0-15.99,0-.59,0-1.18.06-1.74.3-1.27.54-1.84,1.36-1.84,2.72,0,.42-.01,22.48.02,32.18,0,.75.07,1.5-.02,2.25-.26,2.01,1.48,3.19,3.18,3.23.39,0,.79-.01,1.18-.02"/>
+      </g>
+    </g>
+  </g>
+</svg>

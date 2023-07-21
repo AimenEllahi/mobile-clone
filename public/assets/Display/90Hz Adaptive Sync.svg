@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115.05 121.95">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: GothamBold, GothamBold;
+        font-size: 25px;
+      }
+
+      .cls-2 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-3 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-4 {
+        font-family: GothamBook, GothamBook;
+        font-size: 16px;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+
+      .cls-6 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-7 {
+        fill: #fff;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <text class="cls-1" transform="translate(23.59 90.12)"><tspan x="0" y="0">90Hz</tspan></text>
+      <text class="cls-4" transform="translate(0 119.31)"><tspan class="cls-3" x="0" y="0">A</tspan><tspan class="cls-5" x="12.24" y="0">dapti</tspan><tspan class="cls-2" x="53.42" y="0">v</tspan><tspan x="62.33" y="0">e </tspan><tspan class="cls-6" x="76.61" y="0">S</tspan><tspan x="86.61" y="0">ync</tspan></text>
+      <g>
+        <rect class="cls-7" x="40.47" y="1.5" width="45.57" height="23.5"/>
+        <rect class="cls-7" x="35.09" y="6.33" width="45.57" height="23.5"/>
+        <rect class="cls-7" x="29.02" y="11.36" width="45.57" height="23.5"/>
+      </g>
+    </g>
+  </g>
+</svg>
