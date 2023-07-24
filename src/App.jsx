@@ -85,6 +85,14 @@ function App() {
   const activeState = useAnimationStore((state) => state.activeState);
   const [showImages, setShowImages] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [backgroundImage, setBackgroundImage] = useState("/assets/Performance/Helio.png");
+  const handleBatteryClick = () => {
+    setBackgroundImage("/assets/Performance/battery.png");
+  };
+
+  const handleHelioClick = () => {
+    setBackgroundImage("/assets/Performance/Helio.png");
+  };
 
   const perfContRef = useRef();
   const menuRef = useRef();
@@ -118,10 +126,16 @@ function App() {
 
       <CancelButton showImages={showImages} setShowImages={setShowImages} />
       {activeState === 4 && (
-        <div ref={perfContRef} className='performance-container'>
+        <div ref={perfContRef} className='performance-container' style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}>
           <span className='performance-header'>Snapdragon® 8+ Gen 1</span>
-          <span className='performance-text'>MediaTek Helio G88</span>
-          <span className='performance-text'>Large 5000mAh Battery</span>
+          <span className='performance-text'
+          onClick={handleBatteryClick}
+          >Large 5000mAh Battery</span>
+          <span className='performance-text'
+          onClick={handleHelioClick}
+          >MediaTek Helio G88</span>
         </div>
       )}
 
@@ -157,7 +171,17 @@ function App() {
       {activeState === 3 && (
         <div className='display-container'>
           <div className='display-header'>120Hz CrystalRes AMOLED display</div>
-          <img src='/assets/PM_1.png' className='display-img' />
+          <div className="display-icon-header">
+            <div className="display-icon-div">
+              <img src='/assets/Display/d1.svg' className='display-icon-img' />
+            </div>
+            <div className="display-icon-div">
+              <img src='/assets/Display/d2.svg' className='display-icon-img' />
+            </div>
+            <div className="display-icon-div">
+              <img src='/assets/Display/d3.svg' className='display-icon-img' />
+            </div>
+          </div>
         </div>
       )}
 
