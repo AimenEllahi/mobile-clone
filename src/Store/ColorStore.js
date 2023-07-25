@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const useColorStore = create((set) => ({
-  color: "#9fb6d0",
+  color: "#e7e9ed",
   setColor: (state) => set(() => ({ color: state })),
 }));
 

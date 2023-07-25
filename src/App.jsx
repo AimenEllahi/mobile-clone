@@ -74,7 +74,7 @@ function CancelButton({ showImages, setShowImages }) {
   return (
     <MdCancel
       size={25}
-      color={activeState === 2 && !showImages ? "#000" : "#fff"}
+      color={activeState === 2 && !showImages ? "#000" : activeState === 3 ? "#000" : "#fff"}
       className='cancel-button'
       onClick={handleClick}
       style={{
@@ -110,11 +110,13 @@ function App() {
           style={{
             zIndex: 0,
             background:
-              activeState !== 0
-                ? activeState === 2
-                  ? "#fff"
-                  : "#000"
-                : "transparent",
+            activeState !== 0
+            ? activeState === 2
+            ? "#fff"
+            : activeState === 3 // Check if activeState is equal to 3
+            ? "#fff"           // If true, set color to "#fff"
+            : "#000"
+            : "transparent",
           }}
         >
           <ambientLight intensity={0.5} />
@@ -139,13 +141,15 @@ function App() {
             backgroundImage: `url(${backgroundImage})`,
           }}
         >
-          <span className='performance-header'>Snapdragon® 8+ Gen 1</span>
+          {/* <span className='performance-header'>Snapdragon® 8+ Gen 1</span> */}
+          <div className="performance-text-div">
           <span className='performance-text' onClick={handleBatteryClick}>
             Large 5000mAh Battery
           </span>
           <span className='performance-text' onClick={handleHelioClick}>
             MediaTek Helio G88
           </span>
+          </div>
         </div>
       )}
 
@@ -154,24 +158,24 @@ function App() {
         <div className='cam-container'>
           <div className='camera-header'>
             <div className='icon-cam'>
-              <img src='/assets/Camera/01.svg' className='icon-cam-img' />
-              {/* <img src='/assets/icon_2.png' className='icon-cam-img' />
-              <span className='icon-cam-heading'>200MP</span>
+              <img src='/assets/icons_camera/01.svg' className='icon-cam-img' />
+              <span className='icon-cam-heading'>50MP</span>
               <span className='icon-cam-text'>
-                1/1.37” sensor size, 1.2μm pixel size, 16-in-1
-              </span> */}
+              Primary Camera (1.28um, f/1.8)
+              </span> 
             </div>
             <div className='icon-cam'>
-              <img src='/assets/Camera/02.svg' className='icon-cam-img' />
-              {/* <img src='/assets/icon_1.png' className='icon-cam-img' />
-              <span className='icon-cam-heading'>Ultra grand-angle</span>
-              <span className='icon-cam-text'>F2.2 / POV 120</span> */}
+              <img src='/assets/icons_camera/02.svg' className='icon-cam-img' />
+              <span className='icon-cam-heading'>2MP</span>
+              <span className='icon-cam-text'>Macro Camera</span>
             </div>
             <div className='icon-cam'>
-              <img src='/assets/Camera/03.svg' className='icon-cam-img' />
-              {/* <img src='/assets/icon_3.png' className='icon-cam-img' />
-              <span className='icon-cam-heading'>Macro</span>
-              <span className='icon-cam-text'>F2.4</span> */}
+              <img src='/assets/icons_camera/03.svg' className='icon-cam-img' style={{
+                width: "80px",
+                height: "80px"
+              }} />
+              <span className='icon-cam-heading'>8MP</span>
+              <span className='icon-cam-text'>Ultra - wide</span> 
             </div>
           </div>
         </div>
@@ -180,16 +184,28 @@ function App() {
       {/*For display container */}
       {activeState === 3 && (
         <div className='display-container'>
-          <div className='display-header'>120Hz CrystalRes AMOLED display</div>
+        
           <div className='display-icon-header'>
             <div className='display-icon-div'>
-              <img src='/assets/Display/d1.svg' className='display-icon-img' />
+              <div className="display-img-div">
+                <img src='/assets/Display/display1.svg' className='display-icon-img' />
+              </div>
+              <span className="display-icon-text-heading">450</span>
+              <span className="display-icon-text">nits brightness</span>
             </div>
             <div className='display-icon-div'>
-              <img src='/assets/Display/d2.svg' className='display-icon-img' />
+              <div className="display-img-div">
+              <img src='/assets/Display/display2.svg' className='display-icon-img' />
+              </div>
+              <span className="display-icon-text-heading">17.2cm(6.79)</span>
+              <span className="display-icon-text"> FHD + Display</span>
             </div>
             <div className='display-icon-div'>
-              <img src='/assets/Display/d3.svg' className='display-icon-img' />
+              <div className="display-img-div">
+              <img src='/assets/Display/display3.svg' className='display-icon-img' />
+              </div>
+              <span className="display-icon-text-heading">90Hz</span>
+              <span className="display-icon-text">Adaptive Sync</span>
             </div>
           </div>
         </div>
