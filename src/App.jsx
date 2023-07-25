@@ -16,14 +16,10 @@ import Animation from "./Components/Animations";
 import { MdCancel } from "react-icons/md";
 import { useEffect } from "react";
 
-const Loader = ({ setProgress }) => {
-  const { progress, active } = useProgress();
+const Loader = ({ setModelLoaded }) => {
+  const { progress } = useProgress();
 
-  useEffect(() => {
-    setProgress(progress);
-  }, [progress]);
-
-  console.log(active);
+  if (progress > 98) setModelLoaded(true);
 
   return (
     <Html center>
@@ -35,7 +31,7 @@ const Loader = ({ setProgress }) => {
             fontSize: "1.5rem",
           }}
         >
-          {progress < 95 && progress.toFixed(0) + "%"}
+          {progress < 98 && progress.toFixed(0) + "%"}
         </div>
       </div>
     </Html>
@@ -76,7 +72,13 @@ function CancelButton({ showImages, setShowImages }) {
   return (
     <MdCancel
       size={25}
-      color={activeState === 2 && !showImages ? "#000" : activeState === 3 ? "#000" : "#fff"}
+      color={
+        activeState === 2 && !showImages
+          ? "#000"
+          : activeState === 3
+          ? "#000"
+          : "#fff"
+      }
       className='cancel-button'
       onClick={handleClick}
       style={{
@@ -90,7 +92,7 @@ function App() {
   const setActiveState = useAnimationStore((state) => state.setActiveState);
   const activeState = useAnimationStore((state) => state.activeState);
   const [showImages, setShowImages] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [modelLoaded, setModelLoaded] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(
     "/assets/Performance/Helio.png"
   );
@@ -112,24 +114,24 @@ function App() {
           style={{
             zIndex: 0,
             background:
-            activeState !== 0
-            ? activeState === 2
-            ? "#fff"
-            : activeState === 3 // Check if activeState is equal to 3
-            ? "#fff"           // If true, set color to "#fff"
-            : "#000"
-            : "transparent",
+              activeState !== 0
+                ? activeState === 2
+                  ? "#fff"
+                  : activeState === 3 // Check if activeState is equal to 3
+                  ? "#fff" // If true, set color to "#fff"
+                  : "#000"
+                : "transparent",
           }}
         >
           <ambientLight intensity={0.5} />
           <pointLight position={[0, 10, 10]} />
           <directionalLight intensity={1} />
-          <Suspense fallback={<Loader setProgress={setProgress} />}>
-            {activeState !== 3 && activeState !== 2 && <BackgroundBox />}
-            <Environment background={false} preset='apartment' />
+          <Suspense fallback={<Loader setModelLoaded={setModelLoaded} />}>
             <ModelBlue />
+            {activeState !== 3 && activeState !== 2 && <BackgroundBox />}
           </Suspense>
-          {/* <OrbitControls enabled={activeState !== 3} /> */}
+          <Environment background={false} preset='apartment' />
+          <OrbitControls enabled={activeState !== 3} />
           <Animation perfContRef={perfContRef} menuRef={menuRef} />
         </Canvas>
       </div>
@@ -143,14 +145,13 @@ function App() {
             backgroundImage: `url(${backgroundImage})`,
           }}
         >
-          {/* <span className='performance-header'>Snapdragon® 8+ Gen 1</span> */}
-          <div className="performance-text-div">
-          <span className='performance-text' onClick={handleBatteryClick}>
-            Large 5000mAh Battery
-          </span>
-          <span className='performance-text' onClick={handleHelioClick}>
-            MediaTek Helio G88
-          </span>
+          <div className='performance-text-div'>
+            <span className='performance-text' onClick={handleBatteryClick}>
+              Large 5000mAh Battery
+            </span>
+            <span className='performance-text' onClick={handleHelioClick}>
+              MediaTek Helio G88
+            </span>
           </div>
         </div>
       )}
@@ -163,8 +164,8 @@ function App() {
               <img src='/assets/icons_camera/01.svg' className='icon-cam-img' />
               <span className='icon-cam-heading'>50MP</span>
               <span className='icon-cam-text'>
-              Primary Camera (1.28um, f/1.8)
-              </span> 
+                Primary Camera (1.28um, f/1.8)
+              </span>
             </div>
             <div className='icon-cam'>
               <img src='/assets/icons_camera/02.svg' className='icon-cam-img' />
@@ -172,12 +173,16 @@ function App() {
               <span className='icon-cam-text'>Macro Camera</span>
             </div>
             <div className='icon-cam'>
-              <img src='/assets/icons_camera/03.svg' className='icon-cam-img' style={{
-                width: "80px",
-                height: "80px"
-              }} />
+              <img
+                src='/assets/icons_camera/03.svg'
+                className='icon-cam-img'
+                style={{
+                  width: "80px",
+                  height: "80px",
+                }}
+              />
               <span className='icon-cam-heading'>8MP</span>
-              <span className='icon-cam-text'>Ultra - wide</span> 
+              <span className='icon-cam-text'>Ultra - wide</span>
             </div>
           </div>
         </div>
@@ -186,34 +191,42 @@ function App() {
       {/*For display container */}
       {activeState === 3 && (
         <div className='display-container'>
-        
           <div className='display-icon-header'>
             <div className='display-icon-div'>
-              <div className="display-img-div">
-                <img src='/assets/Display/display1.svg' className='display-icon-img' />
+              <div className='display-img-div'>
+                <img
+                  src='/assets/Display/display1.svg'
+                  className='display-icon-img'
+                />
               </div>
-              <span className="display-icon-text-heading">450</span>
-              <span className="display-icon-text">nits brightness</span>
+              <span className='display-icon-text-heading'>450</span>
+              <span className='display-icon-text'>nits brightness</span>
             </div>
             <div className='display-icon-div'>
-              <div className="display-img-div">
-              <img src='/assets/Display/display2.svg' className='display-icon-img' />
+              <div className='display-img-div'>
+                <img
+                  src='/assets/Display/display2.svg'
+                  className='display-icon-img'
+                />
               </div>
-              <span className="display-icon-text-heading">17.2cm(6.79)</span>
-              <span className="display-icon-text"> FHD + Display</span>
+              <span className='display-icon-text-heading'>17.2cm(6.79)</span>
+              <span className='display-icon-text'> FHD + Display</span>
             </div>
             <div className='display-icon-div'>
-              <div className="display-img-div">
-              <img src='/assets/Display/display3.svg' className='display-icon-img' />
+              <div className='display-img-div'>
+                <img
+                  src='/assets/Display/display3.svg'
+                  className='display-icon-img'
+                />
               </div>
-              <span className="display-icon-text-heading">90Hz</span>
-              <span className="display-icon-text">Adaptive Sync</span>
+              <span className='display-icon-text-heading'>90Hz</span>
+              <span className='display-icon-text'>Adaptive Sync</span>
             </div>
           </div>
         </div>
       )}
 
-      {progress < 95 && (
+      {!modelLoaded && (
         <img
           src='/assets/loader.png'
           style={{
@@ -227,7 +240,7 @@ function App() {
       )}
 
       {/*For menu container */}
-      {progress >= 95 && (
+      {modelLoaded && (
         <div ref={menuRef} className='menu-container'>
           {activeState === 2 ? (
             <div className='menu-arrow-img' onClick={() => setShowImages(true)}>

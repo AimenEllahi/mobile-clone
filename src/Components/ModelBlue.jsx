@@ -29,13 +29,14 @@ const colorArray = [
 ];
 
 export function ModelBlue(props) {
-  const { nodes, materials } = useGLTF('/Models/mi19A_Blue-transformed.glb')
+  const { nodes, materials } = useGLTF("/Models/mi19A_Blue-transformed.glb");
 
   const activeState = useAnimationStore((state) => state.activeState);
 
   const [color, setColor] = useState("#e7e9ed");
   const groupRef = useRef();
 
+ 
   const { rotation, position } = useControls({
     rotation: {
       value: [0, 0, 0],
@@ -86,7 +87,7 @@ export function ModelBlue(props) {
     } else if (activeState === 2) {
       gsap.to(groupRef.current.position, {
         x: -0.8,
-        y: -.8,
+        y: -0.8,
         z: -2.22,
         duration: 1,
         onStart: () => {
@@ -122,7 +123,7 @@ export function ModelBlue(props) {
 
   return (
     <group>
-        {activeState === 1 && (
+      {activeState === 1 && (
         <Html position={[0, 0, 0]}>
           <div className='color-container' style={{ border: "1px solid red" }}>
             <span className='color-header'>
@@ -153,43 +154,121 @@ export function ModelBlue(props) {
           </div>
         </Html>
       )}
-    <group
-      ref={groupRef}
-      scale={24}
-      position={position}
-      rotation={rotation}
-      {...props}
-      dispose={null}
+      <group
+        ref={groupRef}
+        scale={24}
+        position={position}
+        rotation={rotation}
+        {...props}
+        dispose={null}
       >
-      <mesh  geometry={nodes['1-11-05815F_8002'].geometry} material={materials.WHITESMOKE} />
-      <mesh geometry={nodes['2-11-145F_8002'].geometry} material={materials.YELLOW} />
-      <mesh geometry={nodes.Circle002.geometry} material={materials.Flash} />
-      <mesh material-color={color} geometry={nodes['GLASS-X19-BATT-COVER002'].geometry} material={materials['Glass.002']} rotation={[Math.PI / 2, 0, 0]} />
-      <mesh geometry={nodes['QT-X19-2M-CAM-LENS003'].geometry} material={materials['transp Glass']}  />
-      <mesh geometry={nodes['QT-X19-BATT-COVER-PRINTING-INK002'].geometry} material={materials.Material} />
-      <mesh geometry={nodes['QT-X19-MAIN-MIC-MESH002'].geometry} material={materials.GRAY34} />
-      <mesh geometry={nodes['QT-X19-SPK-MESH002'].geometry} material={materials.mesh} />
-      <mesh geometry={nodes['SJ-X19-BOT-COVER002'].geometry} material={materials.PHONE_COLOR_1} material-color={color}/>
-      <mesh geometry={nodes['SJ-X19A-CAM-DECO-50M002'].geometry} material={materials.Chrome} />
-      <mesh geometry={nodes.SOLID039.geometry} material={materials.Black_Gummi} />
-      <mesh geometry={nodes.redmi.geometry} material={materials.labels} position={[0.022, -0.059, -0.003]} rotation={[-Math.PI / 2, -Math.PI / 2, 0]} scale={0.163} />
-      <mesh geometry={nodes['02_GLASS_X19_TP002_1'].geometry} material={materials.Screen_Black} />
-      <mesh geometry={nodes['02_GLASS_X19_TP002_2'].geometry} material={materials.Screen_1} />
-      <mesh  geometry={nodes['02_GLASS_X19_TP002_3'].geometry} material={materials['Glass.001']} />
-      <mesh geometry={nodes.Lens_1006_1.geometry} material={materials.Lens} />
-      <mesh geometry={nodes.Lens_1006_2.geometry} material={materials.Camera_Black_Metallic} />
-      <mesh geometry={nodes['SJ-X19-DECO-RING-2007_1'].geometry} material={materials.Black_Glossy} />
-      <mesh geometry={nodes['SJ-X19-DECO-RING-2007_2'].geometry} material={materials.Camera_Black} />
-      <mesh geometry={nodes['SJ-X19-DECO-RING-2007_3'].geometry} material={materials.Camera_Black_Glossy} />
-      <mesh geometry={nodes['SJ-X19-DECO-RING-3002_1'].geometry} material={materials.Black_Glossy} />
-      <mesh geometry={nodes['SJ-X19-DECO-RING-3002_2'].geometry} material={materials.Camera_Black} />
-      <mesh geometry={nodes['SJ-X19-DECO-RING-3002_3'].geometry} material={materials.Camera_Black_Glossy} />
-      <mesh geometry={nodes.TYPE_C_GEEK_615_304_010002_1.geometry} material={materials.bc} />
-      <mesh geometry={nodes.TYPE_C_GEEK_615_304_010002_2.geometry} material={materials.GRAY25} />
-      <mesh geometry={nodes.TYPE_C_GEEK_615_304_010002_3.geometry} material={materials.IVORY} />
+        <mesh
+          geometry={nodes["1-11-05815F_8002"].geometry}
+          material={materials.WHITESMOKE}
+        />
+        <mesh
+          geometry={nodes["2-11-145F_8002"].geometry}
+          material={materials.YELLOW}
+        />
+        <mesh geometry={nodes.Circle002.geometry} material={materials.Flash} />
+        <mesh
+          material-color={color}
+          geometry={nodes["GLASS-X19-BATT-COVER002"].geometry}
+          material={materials["Glass.002"]}
+          rotation={[Math.PI / 2, 0, 0]}
+        />
+        <mesh
+          geometry={nodes["QT-X19-2M-CAM-LENS003"].geometry}
+          material={materials["transp Glass"]}
+        />
+        <mesh
+          geometry={nodes["QT-X19-BATT-COVER-PRINTING-INK002"].geometry}
+          material={materials.Material}
+        />
+        <mesh
+          geometry={nodes["QT-X19-MAIN-MIC-MESH002"].geometry}
+          material={materials.GRAY34}
+        />
+        <mesh
+          geometry={nodes["QT-X19-SPK-MESH002"].geometry}
+          material={materials.mesh}
+        />
+        <mesh
+          geometry={nodes["SJ-X19-BOT-COVER002"].geometry}
+          material={materials.PHONE_COLOR_1}
+          material-color={color}
+        />
+        <mesh
+          geometry={nodes["SJ-X19A-CAM-DECO-50M002"].geometry}
+          material={materials.Chrome}
+        />
+        <mesh
+          geometry={nodes.SOLID039.geometry}
+          material={materials.Black_Gummi}
+        />
+        <mesh
+          geometry={nodes.redmi.geometry}
+          material={materials.labels}
+          position={[0.022, -0.059, -0.003]}
+          rotation={[-Math.PI / 2, -Math.PI / 2, 0]}
+          scale={0.163}
+        />
+        <mesh
+          geometry={nodes["02_GLASS_X19_TP002_1"].geometry}
+          material={materials.Screen_Black}
+        />
+        <mesh
+          geometry={nodes["02_GLASS_X19_TP002_2"].geometry}
+          material={materials.Screen_1}
+        />
+        <mesh
+          geometry={nodes["02_GLASS_X19_TP002_3"].geometry}
+          material={materials["Glass.001"]}
+        />
+        <mesh geometry={nodes.Lens_1006_1.geometry} material={materials.Lens} />
+        <mesh
+          geometry={nodes.Lens_1006_2.geometry}
+          material={materials.Camera_Black_Metallic}
+        />
+        <mesh
+          geometry={nodes["SJ-X19-DECO-RING-2007_1"].geometry}
+          material={materials.Black_Glossy}
+        />
+        <mesh
+          geometry={nodes["SJ-X19-DECO-RING-2007_2"].geometry}
+          material={materials.Camera_Black}
+        />
+        <mesh
+          geometry={nodes["SJ-X19-DECO-RING-2007_3"].geometry}
+          material={materials.Camera_Black_Glossy}
+        />
+        <mesh
+          geometry={nodes["SJ-X19-DECO-RING-3002_1"].geometry}
+          material={materials.Black_Glossy}
+        />
+        <mesh
+          geometry={nodes["SJ-X19-DECO-RING-3002_2"].geometry}
+          material={materials.Camera_Black}
+        />
+        <mesh
+          geometry={nodes["SJ-X19-DECO-RING-3002_3"].geometry}
+          material={materials.Camera_Black_Glossy}
+        />
+        <mesh
+          geometry={nodes.TYPE_C_GEEK_615_304_010002_1.geometry}
+          material={materials.bc}
+        />
+        <mesh
+          geometry={nodes.TYPE_C_GEEK_615_304_010002_2.geometry}
+          material={materials.GRAY25}
+        />
+        <mesh
+          geometry={nodes.TYPE_C_GEEK_615_304_010002_3.geometry}
+          material={materials.IVORY}
+        />
+      </group>
     </group>
-    </group>
-  )
+  );
 }
 
-useGLTF.preload('/mi19A_Blue-transformed.glb')
+useGLTF.preload("/Models/mi19A_Blue-transformed.glb");
