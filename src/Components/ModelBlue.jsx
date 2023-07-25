@@ -33,7 +33,7 @@ export function ModelBlue(props) {
 
   const activeState = useAnimationStore((state) => state.activeState);
 
-  const [color, setColor] = useState("#9fb6d0");
+  const [color, setColor] = useState("#e7e9ed");
   const groupRef = useRef();
 
   const { rotation, position } = useControls({
