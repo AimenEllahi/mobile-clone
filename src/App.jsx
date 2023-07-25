@@ -16,23 +16,14 @@ import Animation from "./Components/Animations";
 import { MdCancel } from "react-icons/md";
 import { useEffect } from "react";
 
-const Loader = ({ setModelLoaded }) => {
+const Loader = () => {
   const { progress } = useProgress();
-
-  if (progress > 98) setModelLoaded(true);
+  console.log(progress);
 
   return (
     <Html center>
       <div className='loading-container'>
-        <div
-          className='loading-bar-container'
-          style={{
-            color: "black",
-            fontSize: "1.5rem",
-          }}
-        >
-          {progress < 98 && progress.toFixed(0) + "%"}
-        </div>
+        <div className='loading-bar-container'>{progress.toFixed(0) + "%"}</div>
       </div>
     </Html>
   );
@@ -126,12 +117,13 @@ function App() {
           <ambientLight intensity={0.5} />
           <pointLight position={[0, 10, 10]} />
           <directionalLight intensity={1} />
-          <Suspense fallback={<Loader setModelLoaded={setModelLoaded} />}>
-            <ModelBlue />
+          <Suspense fallback={<Loader />}>
+            <ModelBlue setModelLoaded={setModelLoaded} />
+
             {activeState !== 3 && activeState !== 2 && <BackgroundBox />}
           </Suspense>
           <Environment background={false} preset='apartment' />
-          <OrbitControls enabled={activeState !== 3} />
+
           <Animation perfContRef={perfContRef} menuRef={menuRef} />
         </Canvas>
       </div>
@@ -200,7 +192,7 @@ function App() {
                 />
               </div>
               <span className='display-icon-text-heading'>450</span>
-              <span className='display-icon-text'>nits brightness</span>
+              <span className='display-icon-text'>Nits brightness</span>
             </div>
             <div className='display-icon-div'>
               <div className='display-img-div'>
@@ -227,16 +219,26 @@ function App() {
       )}
 
       {!modelLoaded && (
-        <img
-          src='/assets/loader.png'
+        <div
           style={{
-            width: "150px",
-            transform: "rotate(-45deg)",
             position: "absolute",
             top: 0,
             left: 0,
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-        />
+        >
+          <img
+            src='/assets/loader.png'
+            style={{
+              width: "180px",
+              transform: "rotate(-60deg)",
+            }}
+          />
+        </div>
       )}
 
       {/*For menu container */}

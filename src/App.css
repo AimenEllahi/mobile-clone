@@ -74,7 +74,7 @@
   margin-top: 8rem;
 }
 
-.performance-text-div{
+.performance-text-div {
   margin-top: 6rem;
   display: flex;
   flex-direction: column;
@@ -347,8 +347,23 @@
   justify-content: space-between;
 }
 
-.display-icon-text-heading{
+.loading-container {
+  position: relative;
+}
+
+.loading-bar-container {
+  position: absolute;
+  top: -50%;
+  margin-top: -1rem;
+  right: -1rem;
+  font-size: 3rem;
+  color: black;
+  border: 1px solid red
+}
+
+.display-icon-text-heading {
   font-weight: bold;
+  font-size: .9rem;
 }
 
 .display-icon-div {
@@ -361,7 +376,7 @@
   /* border: 1px solid pink; */
 }
 
-.display-img-div{
+.display-img-div {
   width: 50px;
   height: 50px;
   display: flex;
@@ -371,7 +386,8 @@
 }
 
 .display-icon-img {
-  width: 100%;
+  width: 1.8rem;
+  object-fit: contain;
   /* color: #fff; */
 }
 

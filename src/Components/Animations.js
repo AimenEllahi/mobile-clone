@@ -48,7 +48,7 @@ export default function Animations({ perfContRef, menuRef }) {
       case 4:
         gsap.to(camera.position, {
           duration: 1,
-          z: -3.5,
+          z: -5.5,
           delay: 0.5,
           ease: "power4.easeOut",
           onComplete: () => {
