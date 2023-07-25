@@ -17,11 +17,13 @@ import { MdCancel } from "react-icons/md";
 import { useEffect } from "react";
 
 const Loader = ({ setProgress }) => {
-  const { progress } = useProgress();
+  const { progress, active } = useProgress();
 
   useEffect(() => {
     setProgress(progress);
   }, [progress]);
+
+  console.log(active);
 
   return (
     <Html center>
@@ -33,7 +35,7 @@ const Loader = ({ setProgress }) => {
             fontSize: "1.5rem",
           }}
         >
-          {progress.toFixed(0)}%
+          {progress < 95 && progress.toFixed(0) + "%"}
         </div>
       </div>
     </Html>
@@ -44,7 +46,7 @@ function BackgroundBox() {
   const meshRef = useRef();
 
   const texture = useMemo(
-    () => new TextureLoader().load("/assets/back.jpg"),
+    () => new TextureLoader().load("/assets/back.png"),
     []
   );
 
@@ -195,7 +197,7 @@ function App() {
         </div>
       )}
 
-      {progress < 98 && (
+      {progress < 95 && (
         <img
           src='/assets/loader.png'
           style={{
@@ -209,7 +211,7 @@ function App() {
       )}
 
       {/*For menu container */}
-      {progress >= 98 && (
+      {progress >= 95 && (
         <div ref={menuRef} className='menu-container'>
           {activeState === 2 ? (
             <div className='menu-arrow-img' onClick={() => setShowImages(true)}>
