@@ -127,7 +127,7 @@ function App() {
             <Environment background={false} preset='apartment' />
             <ModelBlue />
           </Suspense>
-          <OrbitControls enabled={activeState !== 3} />
+          {/* <OrbitControls enabled={activeState !== 3} /> */}
           <Animation perfContRef={perfContRef} menuRef={menuRef} />
         </Canvas>
       </div>
