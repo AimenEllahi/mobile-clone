@@ -16,33 +16,37 @@ import Animation from "./Components/Animations";
 import { MdCancel } from "react-icons/md";
 import { useEffect } from "react";
 
-const Loader = () => {
+const Loader = ({ setProgress }) => {
   const { progress } = useProgress();
-  console.log(progress);
+
   useEffect(() => {
-    console.log("this is progress: " + progress);
+    setProgress(progress);
   }, [progress]);
 
   return (
     <Html center>
-      <div className='loading-container'  >
-        <div className='loading-bar-container' style={{
-          color: "black",
-          fontSize: "1.5rem",
-        }}>
-           {progress}%
+      <div className='loading-container'>
+        <div
+          className='loading-bar-container'
+          style={{
+            color: "black",
+            fontSize: "1.5rem",
+          }}
+        >
+          {progress.toFixed(0)}%
         </div>
       </div>
     </Html>
   );
 };
 
-
-
 function BackgroundBox() {
   const meshRef = useRef();
 
-  const texture = useMemo(() => new TextureLoader().load('/assets/back.jpg'), []);
+  const texture = useMemo(
+    () => new TextureLoader().load("/assets/back.jpg"),
+    []
+  );
 
   useFrame(() => {
     if (meshRef.current) {
@@ -85,7 +89,9 @@ function App() {
   const activeState = useAnimationStore((state) => state.activeState);
   const [showImages, setShowImages] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [backgroundImage, setBackgroundImage] = useState("/assets/Performance/Helio.png");
+  const [backgroundImage, setBackgroundImage] = useState(
+    "/assets/Performance/Helio.png"
+  );
   const handleBatteryClick = () => {
     setBackgroundImage("/assets/Performance/battery.png");
   };
@@ -114,28 +120,32 @@ function App() {
           <ambientLight intensity={0.5} />
           <pointLight position={[0, 10, 10]} />
           <directionalLight intensity={1} />
-          <Environment background={false} preset='apartment' />
-          {activeState !== 3 && activeState !== 2 && <BackgroundBox/>}
-          <Suspense fallback={<Loader/>}>
+          <Suspense fallback={<Loader setProgress={setProgress} />}>
+            {activeState !== 3 && activeState !== 2 && <BackgroundBox />}
+            <Environment background={false} preset='apartment' />
             <ModelBlue />
-            <OrbitControls enabled={activeState !== 3} />
-            <Animation perfContRef={perfContRef} menuRef={menuRef} />
           </Suspense>
+          <OrbitControls enabled={activeState !== 3} />
+          <Animation perfContRef={perfContRef} menuRef={menuRef} />
         </Canvas>
       </div>
 
       <CancelButton showImages={showImages} setShowImages={setShowImages} />
       {activeState === 4 && (
-        <div ref={perfContRef} className='performance-container' style={{
-          backgroundImage: `url(${backgroundImage})`,
-        }}>
+        <div
+          ref={perfContRef}
+          className='performance-container'
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+          }}
+        >
           <span className='performance-header'>Snapdragon® 8+ Gen 1</span>
-          <span className='performance-text'
-          onClick={handleBatteryClick}
-          >Large 5000mAh Battery</span>
-          <span className='performance-text'
-          onClick={handleHelioClick}
-          >MediaTek Helio G88</span>
+          <span className='performance-text' onClick={handleBatteryClick}>
+            Large 5000mAh Battery
+          </span>
+          <span className='performance-text' onClick={handleHelioClick}>
+            MediaTek Helio G88
+          </span>
         </div>
       )}
 
@@ -144,7 +154,7 @@ function App() {
         <div className='cam-container'>
           <div className='camera-header'>
             <div className='icon-cam'>
-            <img src='/assets/Camera/01.svg' className='icon-cam-img' />
+              <img src='/assets/Camera/01.svg' className='icon-cam-img' />
               {/* <img src='/assets/icon_2.png' className='icon-cam-img' />
               <span className='icon-cam-heading'>200MP</span>
               <span className='icon-cam-text'>
@@ -152,13 +162,13 @@ function App() {
               </span> */}
             </div>
             <div className='icon-cam'>
-            <img src='/assets/Camera/02.svg' className='icon-cam-img' />
+              <img src='/assets/Camera/02.svg' className='icon-cam-img' />
               {/* <img src='/assets/icon_1.png' className='icon-cam-img' />
               <span className='icon-cam-heading'>Ultra grand-angle</span>
               <span className='icon-cam-text'>F2.2 / POV 120</span> */}
             </div>
             <div className='icon-cam'>
-            <img src='/assets/Camera/03.svg' className='icon-cam-img' />
+              <img src='/assets/Camera/03.svg' className='icon-cam-img' />
               {/* <img src='/assets/icon_3.png' className='icon-cam-img' />
               <span className='icon-cam-heading'>Macro</span>
               <span className='icon-cam-text'>F2.4</span> */}
@@ -171,89 +181,70 @@ function App() {
       {activeState === 3 && (
         <div className='display-container'>
           <div className='display-header'>120Hz CrystalRes AMOLED display</div>
-          <div className="display-icon-header">
-            <div className="display-icon-div">
+          <div className='display-icon-header'>
+            <div className='display-icon-div'>
               <img src='/assets/Display/d1.svg' className='display-icon-img' />
             </div>
-            <div className="display-icon-div">
+            <div className='display-icon-div'>
               <img src='/assets/Display/d2.svg' className='display-icon-img' />
             </div>
-            <div className="display-icon-div">
+            <div className='display-icon-div'>
               <img src='/assets/Display/d3.svg' className='display-icon-img' />
             </div>
           </div>
         </div>
       )}
 
-      {/*For menu container */}
-      <div ref={menuRef} className='menu-container'>
-        {activeState === 2 ? (
-          <div className='menu-arrow-img' onClick={() => setShowImages(true)}>
-            <img className='arrow-up-img' src='/assets/up.png' />
-          </div>
-        ) : (
-          <>
-            <div className='icon-container' onClick={() => setActiveState(1)}>
-              <img
-                src='/assets/color.jpg'
-                alt='color'
-                className='color-img-icon'
-              />
-              <div className='color-white-bg'></div>
-              <div className='color-icon-text'>Color</div>
-            </div>
-            <div className='icon-container' onClick={() => setActiveState(2)}>
-              <img src='/assets/home_3.png' className='camera-img-icon' />
-              <div className='camera-icon-text'>Camera</div>
-            </div>
-            <div className='icon-container' onClick={() => setActiveState(3)}>
-              <img src='/assets/home_2.png' className='ecran-img-icon' />
-              <div className='ecran-icon-text'>Display</div>
-            </div>
-            <div className='icon-container' onClick={() => setActiveState(4)}>
-              <img src='/assets/home_4.png' className='performance-img-icon' />
-              <div className='performance-icon-text'>Performance</div>
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* {progress < 60 && (
-        <div
+      {progress < 98 && (
+        <img
+          src='/assets/loader.png'
           style={{
+            width: "150px",
+            transform: "rotate(-45deg)",
             position: "absolute",
             top: 0,
-            left: "-100%",
-            width: "80vw",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 10,
-
-            backgroundColor: "white", // Optional: Add a semi-transparent background color
+            left: 0,
           }}
-        >
-          
-          <img
-            src='/assets/load.png'
-            alt='logo'
-            style={{ height: "100%", objectFit: "contain" }} // Adjust the width and height as needed
-          />
-          <span
-            style={{
-              position: "absolute",
-              color: "#000",
-              fontSize: "4rem",
-              textAlign: "center",
-              bottom: "10px",
-              width: "100%",
-            }}
-          >
-            {progress.toFixed(0)}%
-          </span>
+        />
+      )}
+
+      {/*For menu container */}
+      {progress >= 98 && (
+        <div ref={menuRef} className='menu-container'>
+          {activeState === 2 ? (
+            <div className='menu-arrow-img' onClick={() => setShowImages(true)}>
+              <img className='arrow-up-img' src='/assets/up.png' />
+            </div>
+          ) : (
+            <>
+              <div className='icon-container' onClick={() => setActiveState(1)}>
+                <img
+                  src='/assets/color.jpg'
+                  alt='color'
+                  className='color-img-icon'
+                />
+                <div className='color-white-bg'></div>
+                <div className='color-icon-text'>Color</div>
+              </div>
+              <div className='icon-container' onClick={() => setActiveState(2)}>
+                <img src='/assets/home_3.png' className='camera-img-icon' />
+                <div className='camera-icon-text'>Camera</div>
+              </div>
+              <div className='icon-container' onClick={() => setActiveState(3)}>
+                <img src='/assets/home_2.png' className='ecran-img-icon' />
+                <div className='ecran-icon-text'>Display</div>
+              </div>
+              <div className='icon-container' onClick={() => setActiveState(4)}>
+                <img
+                  src='/assets/home_4.png'
+                  className='performance-img-icon'
+                />
+                <div className='performance-icon-text'>Performance</div>
+              </div>
+            </>
+          )}
         </div>
-      )} */}
+      )}
 
       {/*For gallery container */}
       {activeState === 2 && showImages && (
