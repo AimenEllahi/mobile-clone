@@ -1,58 +1,62 @@
-
 .display-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    /* background-color:#fff; */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  opacity: 0;
+  background-color: #fff;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+
+}
 
 
-  .display-header {
-    font-size: 1.2rem;
-    margin-top: 6rem;
-    /* color: #fff; */
-  }
-  
-  .display-icon-header {
-    top: 5rem;
-    position: absolute;
-    width: 80%;
-    /* border: 1px solid #fff; */
-    margin-top: 3rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .display-icon-text-heading{
-    font-weight: bold;
-  }
-  
-  .display-icon-div {
-    width: 100px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    /* border: 1px solid pink; */
-  }
-  
-  .display-img-div{
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid pink; */
-  }
-  
-  .display-icon-img {
-    width: 100%;
-    /* color: #fff; */
-  }
+.display-header {
+  font-size: 1.2rem;
+  margin-top: 6rem;
+  /* color: #fff; */
+}
+
+.display-icon-header {
+  top: 5rem;
+  position: absolute;
+  width: 80%;
+  /* border: 1px solid #fff; */
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.display-icon-text-heading {
+  font-weight: bold;
+}
+
+.display-icon-div {
+  width: 100px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  /* border: 1px solid pink; */
+}
+
+.display-img-div {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid pink; */
+}
+
+.display-icon-img {
+  width: 100%;
+  /* color: #fff; */
+}

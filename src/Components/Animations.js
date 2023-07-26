@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { useThree } from "@react-three/fiber";
 import useAnimationStore from "../Store/AnimationState";
 
-export default function Animations({ perfContRef, menuRef }) {
+export default function Animations({ menuRef }) {
   const activeState = useAnimationStore((state) => state.activeState);
   const { camera } = useThree();
   useEffect(() => {
@@ -51,9 +51,6 @@ export default function Animations({ perfContRef, menuRef }) {
           z: -5.5,
           delay: 0.5,
           ease: "power4.easeOut",
-          onComplete: () => {
-            perfContRef.current.style.opacity = 1;
-          },
         });
         break;
       default:

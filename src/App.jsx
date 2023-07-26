@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import Gallery from "./Components/Gallery/Gallery";
 import Display from "./Components/Display/Display";
 import Camera from "./Components/Camera/Camera";
-import Performance from "./Components/Performance/Performance"
+import Performance from "./Components/Performance/Performance";
 
 const Loader = () => {
   const { progress } = useProgress();
@@ -87,8 +87,8 @@ function App() {
   const setActiveState = useAnimationStore((state) => state.setActiveState);
   const activeState = useAnimationStore((state) => state.activeState);
   const [showImages, setShowImages] = useState(false);
-  const [progress, setProgress] = useState(0);
- 
+  const [modelLoaded, setModelLoaded] = useState(false);
+
   // const perfContRef = useRef();
   const menuRef = useRef();
 
@@ -116,28 +116,20 @@ function App() {
 
             {activeState !== 3 && activeState !== 2 && <BackgroundBox />}
           </Suspense>
-          <OrbitControls enabled={activeState !== 3} />
-          <Animation perfContRef={perfContRef} menuRef={menuRef} />
+
+          <Animation menuRef={menuRef} />
         </Canvas>
       </div>
 
       <CancelButton showImages={showImages} setShowImages={setShowImages} />
       {/* Performance container */}
-      {activeState === 4 && (
-   
-      <Performance  />
-  
-      )}
+      {activeState === 4 && <Performance />}
 
       {/*For camera container */}
-      {activeState === 2 && (
-        <Camera/>
-      )}
+      {activeState === 2 && <Camera />}
 
       {/*For display container */}
-      {activeState === 3 && (
-       <Display/>
-      )}
+      {activeState === 3 && <Display />}
 
       {!modelLoaded && (
         <div
@@ -153,10 +145,14 @@ function App() {
           }}
         >
           <img
-            src='/assets/loader.png'
+            src={
+              window.innerWidth < 468
+                ? "/assets/load-mobile.webp"
+                : "/assets/load-full.webp"
+            }
             style={{
-              width: "180px",
-              transform: "rotate(-60deg)",
+              width: "100vw",
+              height: "100vh",
             }}
           />
         </div>
@@ -172,12 +168,8 @@ function App() {
           ) : (
             <>
               <div className='icon-container' onClick={() => setActiveState(1)}>
-                <div  className='color-img-icon'></div>
-                {/* <img
-                  src='/assets/color.jpg'
-                  alt='color'
-                  className='color-img-icon'
-                /> */}
+                <div className='color-img-icon'></div>
+
                 <div className='color-white-bg'></div>
                 <div className='color-icon-text'>Color</div>
               </div>
@@ -202,9 +194,7 @@ function App() {
       )}
 
       {/*For gallery container */}
-      {activeState === 2 && showImages && (
-        <Gallery/>
-      )}
+      {activeState === 2 && showImages && <Gallery />}
     </div>
   );
 }

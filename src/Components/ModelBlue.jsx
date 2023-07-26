@@ -54,8 +54,7 @@ export function ModelBlue(props) {
 
     // Initial spinning animation with movement
     timeline.to(groupRef.current.position, {
-      z: -9,
-
+      z: -10.5,
       duration: 2,
       ease: "power1.inOut",
       onUpdate: () => {
@@ -102,7 +101,7 @@ export function ModelBlue(props) {
       gsap.to(groupRef.current.position, {
         x: 0,
         y: 0.2,
-        z: -9,
+        z: -10.5,
         duration: 1,
         onStart: () => {
           gsap.to(groupRef.current.rotation, {
@@ -124,7 +123,7 @@ export function ModelBlue(props) {
     <group>
       {activeState === 1 && (
         <Html position={[0, 0, -9]}>
-          <div className='color-container' style={{ border: "1px solid red" }}>
+          <div className='color-container'>
             <span className='color-header'>
               {colorArray.filter((item) => item.hex === color)[0].name}
             </span>
@@ -156,12 +155,11 @@ export function ModelBlue(props) {
       <group
         ref={groupRef}
         scale={24}
-        position={[0, 0, 5]}
         rotation={rotation}
         {...props}
         dispose={null}
       >
-        <PresentationControls polar={[0, 0]} enabled={activeState !== 3}>
+        <PresentationControls enabled={activeState !== 3}>
           <mesh
             geometry={nodes["1-11-05815F_8002"].geometry}
             material={materials.WHITESMOKE}
@@ -175,7 +173,7 @@ export function ModelBlue(props) {
             material={materials.Flash}
           />
           <mesh
-            material-color={color}
+            material-color={activeState === 1 ? color : "#e7e9ed"}
             geometry={nodes["GLASS-X19-BATT-COVER002"].geometry}
             material={materials["Glass.002"]}
             rotation={[Math.PI / 2, 0, 0]}
@@ -199,7 +197,7 @@ export function ModelBlue(props) {
           <mesh
             geometry={nodes["SJ-X19-BOT-COVER002"].geometry}
             material={materials.PHONE_COLOR_1}
-            material-color={color}
+            material-color={activeState === 1 ? color : "#e7e9ed"}
           />
           <mesh
             geometry={nodes["SJ-X19A-CAM-DECO-50M002"].geometry}

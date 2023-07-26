@@ -53,8 +53,6 @@
   transform: scale(1.1);
 }
 
-<<<<<<< HEAD
-=======
 .performance-container {
   position: absolute;
   top: 0;
@@ -89,13 +87,12 @@
   cursor: pointer;
 }
 
->>>>>>> 3a6ce8746b5af22f95af52e8515578cf8ea48fb5
 .color-container {
 
   top: 0;
   transform: translate(-50%, -50%);
   z-index: -1;
-  width: 440px;
+  width: 300px;
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -108,6 +105,7 @@
 .color-header {
   font-size: 1.4rem;
   z-index: -1;
+  width: 100%;
   color: #000;
   position: absolute;
   top: 80%;
@@ -133,33 +131,34 @@
 
 /* Apply the animation to the color-img-icon class */
 .color-img-icon {
-  width: 45px;
-  height: 100px;
-  border-radius: 8px;
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000,
-    #ff0000,
-    #ff7300,
-    #fffb00,
-    #48ff00,
-    #00ffd5,
-    #002bff,
-    #7a00ff,
-    #ff00c8,
-    #ff0000
-  );
-  background-size: 200% 200%; /* Increase the background size to cover the entire element */
-  animation: rotateGradient 10s infinite, moveColorsCircular 10s linear infinite;/* Adjust the animation duration as per your preference */
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 15px;
+
+  margin: -2px;
+
+  background-image: url("/assets/color.jpg");
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+
+
+  /* Increase the background size to cover the entire element */
+  animation: rotatingGrading 15s infinite linear;
+  /* Adjust the animation duration as per your preference */
 }
+
+@keyframes rotatingGrading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .color-white-bg {
   position: absolute;
   top: 50%;
@@ -194,8 +193,6 @@
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-=======
 .gallery-container {
   /* border: 2px solid red; */
   background-color: #000;
@@ -311,16 +308,21 @@
 
 .loading-container {
   position: relative;
+
+  height: 100vh;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .loading-bar-container {
-  position: absolute;
-  top: -50%;
-  margin-top: -1rem;
-  right: -1rem;
+
+
+  transform: translate(90px, -150px) rotate(45deg);
   font-size: 3rem;
   color: black;
-  border: 1px solid red
+
 }
 
 .display-icon-text-heading {
@@ -352,7 +354,6 @@
   object-fit: contain;
   /* color: #fff; */
 }
->>>>>>> 3a6ce8746b5af22f95af52e8515578cf8ea48fb5
 
 .camera-img-icon,
 .ecran-img-icon,
@@ -386,36 +387,4 @@
   width: 45px;
   height: 45px;
   /* border: 1px solid white; */
-}
-
-@keyframes rotateGradient {
-  0% {
-    background-position: 0 50%;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-@keyframes moveColorsCircular {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes upDown {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
 }
