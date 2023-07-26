@@ -36,16 +36,16 @@ export function ModelBlue(props) {
   const [color, setColor] = useState("#e7e9ed");
   const groupRef = useRef();
 
-  const { rotation, position } = useControls({
-    rotation: {
-      value: [0, 0, 0],
-      step: 0.01,
-    },
-    position: {
-      value: [0, 0.2, 20],
-      step: 0.01,
-    },
-  });
+  // const { rotation, position } = useControls({
+  //   rotation: {
+  //     value: [0, 0, 0],
+  //     step: 0.01,
+  //   },
+  //   position: {
+  //     value: [0, 0.2, 20],
+  //     step: 0.01,
+  //   },
+  // });
 
   useEffect(() => {
     props.setModelLoaded(true);
@@ -54,6 +54,7 @@ export function ModelBlue(props) {
 
     // Initial spinning animation with movement
     timeline.to(groupRef.current.position, {
+      x: window.innerWidth < 440  ? -0.4 : 0,
       z: -10.5,
       duration: 2,
       ease: "power1.inOut",
@@ -90,7 +91,7 @@ export function ModelBlue(props) {
         duration: 1,
         onStart: () => {
           gsap.to(groupRef.current.rotation, {
-            x: 0,
+            x: window.innerWidth < 440  ? -0.4 : 0,
             y: -0.64,
             z: 0,
             duration: 1,
@@ -99,7 +100,7 @@ export function ModelBlue(props) {
       });
     } else if (activeState === 0) {
       gsap.to(groupRef.current.position, {
-        x: 0,
+        x: window.innerWidth < 440  ? -0.4 : 0,
         y: 0.2,
         z: -10.5,
         duration: 1,
@@ -122,9 +123,11 @@ export function ModelBlue(props) {
   return (
     <group>
       {activeState === 1 && (
-        <Html position={[0, 0, -9]}>
+        <Html position={[window.innerWidth < 440  ? -0.3 : 0, 0, -9]}>
           <div className='color-container'>
-            <span className='color-header'>
+            <span className='color-header' style={{
+              top: window.innerWidth < 440  ? '77%' : '80%',
+            }}>
               {colorArray.filter((item) => item.hex === color)[0].name}
             </span>
 
@@ -155,7 +158,7 @@ export function ModelBlue(props) {
       <group
         ref={groupRef}
         scale={24}
-        rotation={rotation}
+        rotation={[0, 0, 0]}
         {...props}
         dispose={null}
       >

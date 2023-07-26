@@ -94,7 +94,7 @@ function App() {
 
   return (
     <div className='main-canvas-container'>
-      <div style={{ width: "440px", height: "100vh" }}>
+      <div className="canvas-container-2" style={{ width: "440px", height: "100vh" }}>
         <Canvas
           style={{
             zIndex: 0,

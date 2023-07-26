@@ -12,6 +12,7 @@
   margin: 0;
   padding: 0;
   position: relative;
+  
 }
 
 .menu-container {
@@ -317,8 +318,6 @@
 }
 
 .loading-bar-container {
-
-
   transform: translate(90px, -150px) rotate(45deg);
   font-size: 3rem;
   color: black;
@@ -387,4 +386,18 @@
   width: 45px;
   height: 45px;
   /* border: 1px solid white; */
+}
+
+@media (max-width: 440px) {
+  .menu-container{
+    width: 100%;
+  }
+  .main-canvas-container{
+    width: 100vw;
+    overflow: hidden;
+  }
+  .loading-bar-container {
+    transform: translate(50%, 50%) rotate(45deg);
+    
+  }
 }
