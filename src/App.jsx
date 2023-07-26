@@ -20,25 +20,14 @@ import Display from "./Components/Display/Display";
 import Camera from "./Components/Camera/Camera";
 import Performance from "./Components/Performance/Performance"
 
-const Loader = ({ setProgress }) => {
+const Loader = () => {
   const { progress } = useProgress();
-
-  useEffect(() => {
-    setProgress(progress);
-  }, [progress]);
+  console.log(progress);
 
   return (
     <Html center>
       <div className='loading-container'>
-        <div
-          className='loading-bar-container'
-          style={{
-            color: "black",
-            fontSize: "1.5rem",
-          }}
-        >
-          {progress.toFixed(0)}%
-        </div>
+        <div className='loading-bar-container'>{progress.toFixed(0) + "%"}</div>
       </div>
     </Html>
   );
@@ -48,7 +37,7 @@ function BackgroundBox() {
   const meshRef = useRef();
 
   const texture = useMemo(
-    () => new TextureLoader().load("/assets/back.jpg"),
+    () => new TextureLoader().load("/assets/back.png"),
     []
   );
 
@@ -78,7 +67,13 @@ function CancelButton({ showImages, setShowImages }) {
   return (
     <MdCancel
       size={25}
-      color={activeState === 2 && !showImages ? "#000" : activeState === 3 ? "#000" : "#fff"}
+      color={
+        activeState === 2 && !showImages
+          ? "#000"
+          : activeState === 3
+          ? "#000"
+          : "#fff"
+      }
       className='cancel-button'
       onClick={handleClick}
       style={{
@@ -104,22 +99,22 @@ function App() {
           style={{
             zIndex: 0,
             background:
-            activeState !== 0
-            ? activeState === 2
-            ? "#fff"
-            : activeState === 3 // Check if activeState is equal to 3
-            ? "#fff"           // If true, set color to "#fff"
-            : "#000"
-            : "transparent",
+              activeState !== 0
+                ? activeState === 2
+                  ? "#fff"
+                  : activeState === 3 // Check if activeState is equal to 3
+                  ? "#fff" // If true, set color to "#fff"
+                  : "#000"
+                : "transparent",
           }}
         >
           <ambientLight intensity={0.5} />
           <pointLight position={[0, 10, 10]} />
           <directionalLight intensity={1} />
-          <Suspense fallback={<Loader setProgress={setProgress} />}>
+          <Suspense fallback={<Loader />}>
+            <ModelBlue setModelLoaded={setModelLoaded} />
+
             {activeState !== 3 && activeState !== 2 && <BackgroundBox />}
-            <Environment background={false} preset='apartment' />
-            <ModelBlue />
           </Suspense>
           <OrbitControls enabled={activeState !== 3} />
           <Animation perfContRef={perfContRef} menuRef={menuRef} />
@@ -144,21 +139,31 @@ function App() {
        <Display/>
       )}
 
-      {progress < 98 && (
-        <img
-          src='/assets/loader.png'
+      {!modelLoaded && (
+        <div
           style={{
-            width: "150px",
-            transform: "rotate(-45deg)",
             position: "absolute",
             top: 0,
             left: 0,
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-        />
+        >
+          <img
+            src='/assets/loader.png'
+            style={{
+              width: "180px",
+              transform: "rotate(-60deg)",
+            }}
+          />
+        </div>
       )}
 
       {/*For menu container */}
-      {progress >= 98 && (
+      {modelLoaded && (
         <div ref={menuRef} className='menu-container'>
           {activeState === 2 ? (
             <div className='menu-arrow-img' onClick={() => setShowImages(true)}>
