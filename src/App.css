@@ -53,40 +53,6 @@
   transform: scale(1.1);
 }
 
-.performance-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  color: #fff;
-}
-
-.performance-header {
-  font-size: 1.5rem;
-  margin-top: 8rem;
-}
-
-.performance-text-div{
-  margin-top: 6rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.performance-text {
-  font-size: 1rem;
-  margin-top: 30px;
-  color: lightgray;
-  cursor: pointer;
-}
-
 .color-container {
 
   top: 0;
@@ -126,14 +92,37 @@
   transform: scale(1.1);
 }
 
-.color-img-icon {
-  width: 100%;
-  border-radius: 8px;
-  animation: homeanim 5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
 
+
+/* Apply the animation to the color-img-icon class */
+.color-img-icon {
+  width: 45px;
+  height: 100px;
+  border-radius: 8px;
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  background-size: 200% 200%; /* Increase the background size to cover the entire element */
+  animation: rotateGradient 10s infinite, moveColorsCircular 10s linear infinite;/* Adjust the animation duration as per your preference */
+}
 .color-white-bg {
   position: absolute;
   top: 50%;
@@ -155,72 +144,6 @@
   color: rgb(80, 79, 79);
 }
 
-.display-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  /* background-color:#fff; */
-}
-
-.cam-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  /* border: 1px solid black; */
-
-}
-
-.camera-header {
-  /* border: 1px solid black; */
-  width: 40%;
-  height: 70%;
-  transform: translate(-50%, 25%);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.icon-cam {
-  width: 100%;
-  height: 100%;
-  /* border: 1px solid red; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.icon-cam-img {
-  width: 60px;
-  height: 60px;
-  /* border: 1px solid blue; */
-}
-
-
-.icon-cam-heading {
-  font-size: 1rem;
-  color: black;
-  font-weight: bold;
-}
-
-.icon-cam-text {
-  width: 40%;
-  font-size: 0.7rem;
-}
-
 .menu-arrow-img {
   /* animation */
   animation: upDown 2s infinite ease-in-out;
@@ -234,146 +157,6 @@
   cursor: pointer;
 }
 
-.gallery-container {
-  /* border: 2px solid red; */
-  background-color: #000;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 2;
-}
-
-.gallery-content-container {
-  /* border: 1px solid blue; */
-  width: 90%;
-  height: 95%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.gallery-text-container {
-  /* border: 1px solid green; */
-  font-size: .8rem;
-  width: 100%;
-  height: 25%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.gallery-text {
-  color: #fff;
-}
-
-.gallery-img-container {
-  display: flex;
-  height: 70vh;
-}
-
-.left-gallery {
-  /* border: 1px solid purple; */
-  width: 47%;
-  height: 80vh;
-  float: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.right-gallery {
-  /* border: 1px solid purple; */
-  width: 47%;
-  height: 80vh;
-  float: right;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.gallery-img {
-  /* border: 1px solid #fff; */
-}
-
-.gallery-img1 {
-  height: 120px;
-}
-
-.gallery-img2 {
-  height: 120px;
-}
-
-.gallery-img3 {
-  height: 320px;
-}
-
-.gallery-img4 {
-  height: 150px;
-}
-
-.gallery-img5 {
-  height: 120px;
-}
-
-.gallery-img6 {
-  height: 300px;
-}
-
-.gallery-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-
-.display-header {
-  font-size: 1.2rem;
-  margin-top: 6rem;
-  /* color: #fff; */
-}
-
-.display-icon-header {
-  top: 5rem;
-  position: absolute;
-  width: 80%;
-  /* border: 1px solid #fff; */
-  margin-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.display-icon-text-heading{
-  font-weight: bold;
-}
-
-.display-icon-div {
-  width: 100px;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
-  /* border: 1px solid pink; */
-}
-
-.display-img-div{
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* border: 1px solid pink; */
-}
-
-.display-icon-img {
-  width: 100%;
-  /* color: #fff; */
-}
 
 .camera-img-icon,
 .ecran-img-icon,
@@ -397,14 +180,6 @@
   color: white;
 }
 
-.performance-icon-text {
-
-
-  font-size: 9px;
-  font-weight: 700;
-  color: white;
-}
-
 .icon-container {
   position: relative;
   cursor: pointer;
@@ -417,8 +192,23 @@
   /* border: 1px solid white; */
 }
 
+@keyframes rotateGradient {
+  0% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
 
-
+@keyframes moveColorsCircular {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
 
 @keyframes upDown {
   0% {

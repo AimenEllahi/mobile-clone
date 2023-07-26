@@ -9,7 +9,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 import { gsap } from "gsap";
 
-import useAnimationStore from "../Store/AnimationState";
+import useAnimationStore from "../src/Store/AnimationState";
 const colorArray = [
   {
     name: "Blue",

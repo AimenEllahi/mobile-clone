@@ -1,6 +1,6 @@
 import React, { useRef, Suspense, useState, useMemo } from "react";
 import "./App.css";
-import LoaderComponent from "./Components/LoaderComponent";
+// import LoaderComponent from "./Components/LoaderComponent";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Environment,
@@ -15,6 +15,10 @@ import useAnimationStore from "./Store/AnimationState";
 import Animation from "./Components/Animations";
 import { MdCancel } from "react-icons/md";
 import { useEffect } from "react";
+import Gallery from "./Components/Gallery/Gallery";
+import Display from "./Components/Display/Display";
+import Camera from "./Components/Camera/Camera";
+import Performance from "./Components/Performance/Performance"
 
 const Loader = ({ setProgress }) => {
   const { progress } = useProgress();
@@ -89,18 +93,8 @@ function App() {
   const activeState = useAnimationStore((state) => state.activeState);
   const [showImages, setShowImages] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [backgroundImage, setBackgroundImage] = useState(
-    "/assets/Performance/Helio.png"
-  );
-  const handleBatteryClick = () => {
-    setBackgroundImage("/assets/Performance/battery.png");
-  };
-
-  const handleHelioClick = () => {
-    setBackgroundImage("/assets/Performance/Helio.png");
-  };
-
-  const perfContRef = useRef();
+ 
+  // const perfContRef = useRef();
   const menuRef = useRef();
 
   return (
@@ -127,88 +121,27 @@ function App() {
             <Environment background={false} preset='apartment' />
             <ModelBlue />
           </Suspense>
-          {/* <OrbitControls enabled={activeState !== 3} /> */}
+          <OrbitControls enabled={activeState !== 3} />
           <Animation perfContRef={perfContRef} menuRef={menuRef} />
         </Canvas>
       </div>
 
       <CancelButton showImages={showImages} setShowImages={setShowImages} />
+      {/* Performance container */}
       {activeState === 4 && (
-        <div
-          ref={perfContRef}
-          className='performance-container'
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-          }}
-        >
-          {/* <span className='performance-header'>Snapdragon® 8+ Gen 1</span> */}
-          <div className="performance-text-div">
-          <span className='performance-text' onClick={handleBatteryClick}>
-            Large 5000mAh Battery
-          </span>
-          <span className='performance-text' onClick={handleHelioClick}>
-            MediaTek Helio G88
-          </span>
-          </div>
-        </div>
+   
+      <Performance  />
+  
       )}
 
       {/*For camera container */}
       {activeState === 2 && (
-        <div className='cam-container'>
-          <div className='camera-header'>
-            <div className='icon-cam'>
-              <img src='/assets/icons_camera/01.svg' className='icon-cam-img' />
-              <span className='icon-cam-heading'>50MP</span>
-              <span className='icon-cam-text'>
-              Primary Camera (1.28um, f/1.8)
-              </span> 
-            </div>
-            <div className='icon-cam'>
-              <img src='/assets/icons_camera/02.svg' className='icon-cam-img' />
-              <span className='icon-cam-heading'>2MP</span>
-              <span className='icon-cam-text'>Macro Camera</span>
-            </div>
-            <div className='icon-cam'>
-              <img src='/assets/icons_camera/03.svg' className='icon-cam-img' style={{
-                width: "80px",
-                height: "80px"
-              }} />
-              <span className='icon-cam-heading'>8MP</span>
-              <span className='icon-cam-text'>Ultra - wide</span> 
-            </div>
-          </div>
-        </div>
+        <Camera/>
       )}
 
       {/*For display container */}
       {activeState === 3 && (
-        <div className='display-container'>
-        
-          <div className='display-icon-header'>
-            <div className='display-icon-div'>
-              <div className="display-img-div">
-                <img src='/assets/Display/display1.svg' className='display-icon-img' />
-              </div>
-              <span className="display-icon-text-heading">450</span>
-              <span className="display-icon-text">nits brightness</span>
-            </div>
-            <div className='display-icon-div'>
-              <div className="display-img-div">
-              <img src='/assets/Display/display2.svg' className='display-icon-img' />
-              </div>
-              <span className="display-icon-text-heading">17.2cm(6.79)</span>
-              <span className="display-icon-text"> FHD + Display</span>
-            </div>
-            <div className='display-icon-div'>
-              <div className="display-img-div">
-              <img src='/assets/Display/display3.svg' className='display-icon-img' />
-              </div>
-              <span className="display-icon-text-heading">90Hz</span>
-              <span className="display-icon-text">Adaptive Sync</span>
-            </div>
-          </div>
-        </div>
+       <Display/>
       )}
 
       {progress < 98 && (
@@ -234,11 +167,12 @@ function App() {
           ) : (
             <>
               <div className='icon-container' onClick={() => setActiveState(1)}>
-                <img
+                <div  className='color-img-icon'></div>
+                {/* <img
                   src='/assets/color.jpg'
                   alt='color'
                   className='color-img-icon'
-                />
+                /> */}
                 <div className='color-white-bg'></div>
                 <div className='color-icon-text'>Color</div>
               </div>
@@ -264,67 +198,7 @@ function App() {
 
       {/*For gallery container */}
       {activeState === 2 && showImages && (
-        <div className='gallery-container'>
-          <div className='gallery-content-container'>
-            <div className='gallery-text-container'>
-              <span className='gallery-text'>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Repellat repellendus error cum expedita distinctio recusandae
-                quo aspernatur modi! Ab libero aspernatur impedit aliquid quod
-                reiciendis a. Vel aut doloremque aperiam.
-              </span>
-            </div>
-            <div className='gallery-img-conatiner'>
-              <div className='left-gallery'>
-                <div className='gallery-img gallery-img1'>
-                  <img
-                    src='/assets/P3_1.jpg'
-                    alt='Image 1'
-                    className='gallery-image'
-                  />
-                </div>
-                <div className='gallery-img gallery-img2'>
-                  <img
-                    src='/assets/P3_2.jpg'
-                    alt='Image 2'
-                    className='gallery-image'
-                  />
-                </div>
-                <div className='gallery-img gallery-img3'>
-                  <img
-                    src='/assets/P3_3.jpg'
-                    alt='Image 3'
-                    className='gallery-image'
-                  />
-                </div>
-              </div>
-
-              <div className='right-gallery'>
-                <div className='gallery-img gallery-img4'>
-                  <img
-                    src='/assets/P3_4.jpg'
-                    alt='Image 4'
-                    className='gallery-image'
-                  />
-                </div>
-                <div className='gallery-img gallery-img5'>
-                  <img
-                    src='/assets/P3_5.jpg'
-                    alt='Image 5'
-                    className='gallery-image'
-                  />
-                </div>
-                <div className='gallery-img gallery-img6'>
-                  <img
-                    src='/assets/P3_6.jpg'
-                    alt='Image 6'
-                    className='gallery-image'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Gallery/>
       )}
     </div>
   );
