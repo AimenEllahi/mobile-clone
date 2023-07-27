@@ -115,9 +115,8 @@ function App() {
           <pointLight position={[0, 10, 10]} />
           <directionalLight intensity={1} />
           <Suspense fallback={<Loader />}>
-            <ModelBlue setModelLoaded={setModelLoaded} />
-
             {activeState !== 3 && activeState !== 2 && <BackgroundBox />}
+            <ModelBlue setModelLoaded={setModelLoaded} />
           </Suspense>
 
           <Animation menuRef={menuRef} />
@@ -171,8 +170,9 @@ function App() {
           ) : (
             <>
               <div className='icon-container' onClick={() => setActiveState(1)}>
-                <div className='color-img-icon'></div>
+                {/* <img src='/assets/color.jpg' className='color-img-icon' /> */}
 
+                <div className='color-img-icon'></div>
                 <div className='color-white-bg'></div>
                 <div className='color-icon-text'>Color</div>
               </div>

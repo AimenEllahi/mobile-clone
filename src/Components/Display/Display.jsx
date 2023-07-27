@@ -28,7 +28,7 @@ export default function Display() {
     <div
       ref={ref}
       style={{
-        backgroundImage: `url(/assets/Display/Display.webp)`,
+        backgroundImage: `url(/assets/Display/Display-2.webp)`,
       }}
       className='display-container'
     >
