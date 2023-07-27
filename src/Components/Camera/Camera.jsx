@@ -41,13 +41,18 @@ export default function Camera() {
           <span className='icon-cam-heading'>2MP</span>
           <span className='icon-cam-text'>Macro Camera</span>
         </div>
-        <div className='icon-cam'>
+        <div className='icon-cam'
+           style={{
+            transform: "translateY(-40px)"
+          }}>
           <img
             src='/assets/icons_camera/03.svg'
             className='icon-cam-img'
             style={{
+              // border : "2px solid #000",
               width: "80px",
               height: "80px",
+             
             }}
           />
           <span className='icon-cam-heading'>8MP</span>

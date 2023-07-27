@@ -106,7 +106,7 @@ export function ModelBlue(props) {
         duration: 1,
         onStart: () => {
           gsap.to(groupRef.current.rotation, {
-            x: 0,
+            x: window.innerWidth < 440  ? -0.4 : 0,
             y: 0,
             z: 0,
             duration: 1,
@@ -162,7 +162,7 @@ export function ModelBlue(props) {
         {...props}
         dispose={null}
       >
-        <PresentationControls enabled={activeState !== 3}>
+        {/* <PresentationControls enabled={activeState !== 3}> */}
           <mesh
             geometry={nodes["1-11-05815F_8002"].geometry}
             material={materials.WHITESMOKE}
@@ -273,7 +273,7 @@ export function ModelBlue(props) {
             geometry={nodes.TYPE_C_GEEK_615_304_010002_3.geometry}
             material={materials.IVORY}
           />
-        </PresentationControls>
+        {/* </PresentationControls> */}
       </group>
     </group>
   );

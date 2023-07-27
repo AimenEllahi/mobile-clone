@@ -135,28 +135,22 @@
   min-width: 50px;
   min-height: 50px;
   border-radius: 15px;
-
+  background: radial-gradient(circle, #f6d9d2, #52a3af, #f6d9d2, #f08966, #f9e58a, #ed93c9); /* Replace these colors with your desired pastel colors */
   margin: -2px;
-
-  background-image: url("/assets/color.jpg");
-  background-size: fill;
-  background-position: center;
-  background-repeat: no-repeat;
-
-
-  /* Increase the background size to cover the entire element */
-  animation: rotatingGrading 15s infinite linear;
-  /* Adjust the animation duration as per your preference */
+  animation: homeani 5s infinite linear;
+  background-size: 200% 200%; /* This value can be adjusted to control the gradient size */
+  background-position: 0% 0%; /* This value controls the initial position of the gradient */
 }
 
-@keyframes rotatingGrading {
+@keyframes homeani {
   0% {
-    transform: rotate(0deg);
+    background-position: 0% 0%;
+   
   }
 
-
   100% {
-    transform: rotate(360deg);
+    background-position: 100% 100%;
+   
   }
 }
 
@@ -385,6 +379,8 @@
   align-items: center;
   width: 45px;
   height: 45px;
+
+  
   /* border: 1px solid white; */
 }
 

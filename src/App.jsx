@@ -118,6 +118,7 @@ function App() {
           </Suspense>
 
           <Animation menuRef={menuRef} />
+          <OrbitControls  enabled={activeState !== 3}/> 
         </Canvas>
       </div>
 
@@ -168,8 +169,10 @@ function App() {
           ) : (
             <>
               <div className='icon-container' onClick={() => setActiveState(1)}>
+                
+                  {/* <img src='/assets/color.jpg' className='color-img-icon' /> */}
+                
                 <div className='color-img-icon'></div>
-
                 <div className='color-white-bg'></div>
                 <div className='color-icon-text'>Color</div>
               </div>
