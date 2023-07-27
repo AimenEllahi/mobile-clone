@@ -44,7 +44,7 @@ export function ModelBlue(props) {
 
     // Initial spinning animation with movement
     timeline.to(groupRef.current.position, {
-      x: window.innerWidth < 440 ? -0.4 : 0,
+      x: 0,
       z: 0.4,
       duration: -10,
       ease: "power1.inOut",
@@ -97,7 +97,7 @@ export function ModelBlue(props) {
       });
     } else if (activeState === 0) {
       gsap.to(groupRef.current.position, {
-        x: window.innerWidth < 440 ? -0.4 : 0,
+        x: 0,
         y: 0.4,
         z: -10,
         duration: 1,
@@ -324,13 +324,9 @@ const CustomOrbitControl = ({ object }) => {
     window.addEventListener("mouseup", onMouseUp);
     gl.domElement.addEventListener("mousemove", onMouseMove);
 
-    gl.domElement.addEventListener("touchstart", onMouseDown, {
-      passive: false,
-    });
-    gl.domElement.addEventListener("touchend", onMouseUp);
-    gl.domElement.addEventListener("touchmove", onMouseDown, {
-      passive: false,
-    });
+    window.addEventListener("touchstart", onMouseDown);
+    window.addEventListener("touchend", onMouseUp);
+    window.addEventListener("touchmove", onMouseMove);
   }, []);
 
   return null;
