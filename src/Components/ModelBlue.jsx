@@ -274,7 +274,10 @@ const CustomOrbitControl = ({ object }) => {
 
   const onMouseDown = (event) => {
     isDragging = true;
-    previousMouse.current = [event.clientX, event.clientY];
+    previousMouse.current =
+      event.type === "touchstart"
+        ? [event.touches[0].clientX, event.touches[0].clientY]
+        : [event.clientX, event.clientY];
   };
 
   const onMouseUp = () => {
@@ -283,10 +286,13 @@ const CustomOrbitControl = ({ object }) => {
 
   const onMouseMove = (event) => {
     if (!isDragging) return;
-
+    const clientX =
+      event.type === "touchmove" ? event.touches[0].clientX : event.clientX;
+    const clientY =
+      event.type === "touchmove" ? event.touches[0].clientY : event.clientY;
     const deltaMove = [
-      event.clientX - previousMouse.current[0],
-      event.clientY - previousMouse.current[1],
+      clientX - previousMouse.current[0],
+      clientY - previousMouse.current[1],
     ];
 
     const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
@@ -303,7 +309,7 @@ const CustomOrbitControl = ({ object }) => {
       object.current.quaternion
     );
 
-    previousMouse.current = [event.clientX, event.clientY];
+    previousMouse.current = [clientX, clientY];
   };
 
   const toRadians = (angle) => {
@@ -317,6 +323,14 @@ const CustomOrbitControl = ({ object }) => {
     gl.domElement.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mouseup", onMouseUp);
     gl.domElement.addEventListener("mousemove", onMouseMove);
+
+    gl.domElement.addEventListener("touchstart", onMouseDown, {
+      passive: false,
+    });
+    gl.domElement.addEventListener("touchend", onMouseUp);
+    gl.domElement.addEventListener("touchmove", onMouseDown, {
+      passive: false,
+    });
   }, []);
 
   return null;
