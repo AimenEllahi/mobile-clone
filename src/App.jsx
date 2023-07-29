@@ -67,13 +67,7 @@ function CancelButton({ showImages, setShowImages }) {
   return (
     <MdCancel
       size={25}
-      color={
-        activeState === 2 && !showImages
-          ? "#000"
-          : activeState === 3
-          ? "#000"
-          : "#fff"
-      }
+      color={activeState === 2 ? "#000" : activeState === 3 ? "#000" : "#fff"}
       className='cancel-button'
       onClick={handleClick}
       style={{

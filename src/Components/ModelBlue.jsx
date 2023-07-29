@@ -202,7 +202,7 @@ export function ModelBlue(props) {
         />
         <mesh
           geometry={nodes.redmi.geometry}
-          position={[0.022, -0.059, -0.0035]}
+          position={[0.022, -0.059, -0.0045]}
           rotation={[-Math.PI / 2, -Math.PI / 2, 0]}
           scale={0.163}
         />
